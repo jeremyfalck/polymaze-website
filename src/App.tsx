@@ -1,22 +1,30 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import NavBar from "./header/Navbar";
+import NavBar from "./components/navbar/Navbar";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./components/pages/home/Home";
+import Projects from "./components/pages/projects/Projects";
+import Team from "./components/pages/team/Team";
+import Contact from "./components/pages/contact/Contact";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBar />,
+    element: (
+      <>
+        <NavBar index={0} />
+        <Home />
+      </>
+    ),
   },
   {
     path: "/projects",
     element: (
       <>
-        <NavBar />
-        <div>projects</div>
+        <NavBar index={1} />
+        <Projects />
       </>
     ),
   },
@@ -24,8 +32,8 @@ const router = createBrowserRouter([
     path: "/team",
     element: (
       <>
-        <NavBar />
-        <div>team</div>
+        <NavBar index={2} />
+        <Team />
       </>
     ),
   },
@@ -33,8 +41,8 @@ const router = createBrowserRouter([
     path: "/contact",
     element: (
       <>
-        <NavBar />
-        <div>contact</div>
+        <NavBar index={3} />
+        <Contact />
       </>
     ),
   },
@@ -43,7 +51,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <div className="flex flex-col">
+        <RouterProvider router={router} />
+      </div>
     </React.StrictMode>
   );
 }
