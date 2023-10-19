@@ -7,15 +7,17 @@ import { RootState } from "../../redux/store";
 import { setItemSelected } from "../../redux/header/navBarSlice";
 import { redirect, useNavigate } from "react-router-dom";
 
+import paths from "../../constants/paths.json";
+
 interface NavBarProps {
   index: number;
 }
 
 const navigation = [
-  { name: "Accueil", href: "/", current: true },
-  { name: "Nos Projets", href: "/projects", current: false },
-  { name: "Team", href: "/team", current: false },
-  { name: "Contacter", href: "/contact", current: false },
+  { name: "Accueil", href: paths.root, current: true },
+  { name: "Nos Projets", href: paths.projects, current: false },
+  { name: "Team", href: paths.team, current: false },
+  { name: "Contacter", href: paths.contact, current: false },
 ];
 
 function classNames(...classes: string[]) {

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "./components/navbar/Navbar";
 
@@ -8,10 +7,11 @@ import Home from "./components/pages/home/Home";
 import Projects from "./components/pages/projects/Projects";
 import Team from "./components/pages/team/Team";
 import Contact from "./components/pages/contact/Contact";
+import paths from "./constants/paths.json";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: paths.root,
     element: (
       <>
         <NavBar index={0} />
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/projects",
+    path: paths.projects,
     element: (
       <>
         <NavBar index={1} />
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/team",
+    path: paths.team,
     element: (
       <>
         <NavBar index={2} />
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/contact",
+    path: paths.contact,
     element: (
       <>
         <NavBar index={3} />
