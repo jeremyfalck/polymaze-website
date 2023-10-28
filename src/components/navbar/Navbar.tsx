@@ -1,12 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import PolyMazeIcon from "../../assets/images/polymaze_logo.png";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 
 import paths from "../../constants/paths.json";
-import { LegacyRef, forwardRef } from "react";
+import { ForwardedRef, forwardRef } from "react";
 
 interface NavBarProps {
   index: number;
@@ -24,7 +22,7 @@ function classNames(...classes: string[]) {
 }
 
 export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
-  (props: NavBarProps, ref) => {
+  (props: NavBarProps, ref: ForwardedRef<HTMLDivElement>) => {
     const navigate = useNavigate();
 
     return (
@@ -79,7 +77,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden">
+            <Disclosure.Panel className="sm:hidden absolute bg-black w-full">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item, position) => {
                   return (
