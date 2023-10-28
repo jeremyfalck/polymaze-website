@@ -35,24 +35,24 @@ export default function Home() {
   return (
     <>
       <main className="bg-black overscroll-none overflow-hidden">
+        <Smoke
+          smokeOpacity="0.3"
+          smokeColor="#FFFFFF"
+          width={dimensions.width}
+          height={dimensions.height - headerHeight}
+        />
         <div
-          className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-hidden overflow-y-auto "
+          className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto "
           style={{
-            marginTop: headerHeight,
-            maxHeight: dimensions.height - headerHeight,
+            maxHeight: dimensions.height,
           }}
         >
+          <div style={{ height: headerHeight }} />
           <BandHeader />
           <WhoAreWe />
           <MembersPresentation />
         </div>
         <NavBar index={0} ref={ref} />
-        <Smoke
-          smokeOpacity="0.3"
-          smokeColor="#FFFFFF"
-          width={dimensions.width}
-          height={dimensions.height}
-        />
       </main>
     </>
   );

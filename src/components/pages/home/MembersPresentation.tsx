@@ -36,10 +36,13 @@ export const MembersPresentation = () => {
   return (
     <ul
       role="list"
-      className="flex flex-row py-6 mx-auto self-center justify-center max-w-7xl"
+      className="sm:flex flex-col sm:flex-row px-6 sm:py-6 mx-auto self-center justify-center max-w-7xl"
     >
       {presentations.map((member: MemberPresentation) => (
-        <li key={member.name} className="flex justify-between gap-x-6 px-5">
+        <li
+          key={member.name}
+          className="flex justify-between w-1/2 sm:w-auto mx-auto sm:gap-x-6 py-5 sm:px-5 sm:py-0"
+        >
           <div className="flex min-w-0 gap-x-4">
             <img
               className="h-20 w-20 flex-none rounded-full bg-gray-50"

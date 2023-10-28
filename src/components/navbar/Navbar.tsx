@@ -26,10 +26,13 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
     const navigate = useNavigate();
 
     return (
-      <Disclosure as="nav" className="bg-black flex-none">
+      <Disclosure
+        as="nav"
+        className="bg-black bg-opacity-80 flex-none absolute top-0 left-0 w-full"
+      >
         {({ open }) => (
           <>
-            <div className="mx-auto px-2 sm:px-6 lg:px-8 bg-black" ref={ref}>
+            <div className="mx-auto px-2 sm:px-6 lg:px-8" ref={ref}>
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
@@ -61,8 +64,8 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                           className={classNames(
                             position == props.index
                               ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                              : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
                           )}
                           aria-current={
                             position == props.index ? "page" : undefined
@@ -77,7 +80,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden absolute bg-black w-full">
+            <Disclosure.Panel className="sm:hidden absolute bg-black bg-opacity-80 w-full">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item, position) => {
                   return (
@@ -90,8 +93,8 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                       className={classNames(
                         position == props.index
                           ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium"
+                          : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
+                        "block rounded-md px-3 py-2 text-base font-medium bg-opacity-60"
                       )}
                       aria-current={
                         position == props.index ? "page" : undefined

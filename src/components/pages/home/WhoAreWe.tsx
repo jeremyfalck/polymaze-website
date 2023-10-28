@@ -14,12 +14,6 @@ export const WhoAreWe = () => {
       <p className={whiteTextClass}>{strings.band_presentation_part2}</p>
       <br />
       <p className={whiteTextClass}>{strings.band_presentation_part3}</p>
-      <br />
-      <p className={whiteTextClass}>{strings.band_presentation_part4}</p>
-      <br />
-      <p className={whiteTextClass}>{strings.band_presentation_part5}</p>
-      <br />
-      <p className={whiteTextClass}>{strings.band_presentation_part6}</p>
     </div>
   );
 };

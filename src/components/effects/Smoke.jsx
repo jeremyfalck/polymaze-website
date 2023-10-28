@@ -89,7 +89,7 @@ export default class Smoke extends Component {
   };
   render() {
     return (
-      <div 
+      <div className="absolute top-0 left-0 w-full h-full"
       ref={(mount) => {
           this.mount = mount;
         }}
