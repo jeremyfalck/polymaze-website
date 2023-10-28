@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./components/navbar/Navbar";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/pages/home/Home";
@@ -12,39 +11,19 @@ import paths from "./constants/paths.json";
 const router = createBrowserRouter([
   {
     path: paths.root,
-    element: (
-      <>
-        <NavBar index={0} />
-        <Home />
-      </>
-    ),
+    element: <Home />,
   },
   {
     path: paths.projects,
-    element: (
-      <>
-        <NavBar index={1} />
-        <Projects />
-      </>
-    ),
+    element: <Projects />,
   },
   {
     path: paths.team,
-    element: (
-      <>
-        <NavBar index={2} />
-        <Team />
-      </>
-    ),
+    element: <Team />,
   },
   {
     path: paths.contact,
-    element: (
-      <>
-        <NavBar index={3} />
-        <Contact />
-      </>
-    ),
+    element: <Contact />,
   },
 ]);
 
