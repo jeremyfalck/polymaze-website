@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/polymaze-website/static/css/main.de077d18.css",
-    "main.js": "/polymaze-website/static/js/main.f296d1ba.js",
+    "main.js": "/polymaze-website/static/js/main.0fe5dc25.js",
     "static/js/787.1d45f1af.chunk.js": "/polymaze-website/static/js/787.1d45f1af.chunk.js",
-    "static/media/polymaze_collage.png": "/polymaze-website/static/media/polymaze_collage.0206dda18a80cf7c0ae9.png",
+    "static/media/polymaze_collage.png": "/polymaze-website/static/media/polymaze_collage.5f52ccdf7c337e8bc453.png",
     "static/media/polymaze_logo.png": "/polymaze-website/static/media/polymaze_logo.ac6f1fd5154111a68c85.png",
     "static/media/thibaut_photo.png": "/polymaze-website/static/media/thibaut_photo.b358ddff9e6ba3cb5e57.png",
     "index.html": "/polymaze-website/index.html",
     "main.de077d18.css.map": "/polymaze-website/static/css/main.de077d18.css.map",
-    "main.f296d1ba.js.map": "/polymaze-website/static/js/main.f296d1ba.js.map",
+    "main.0fe5dc25.js.map": "/polymaze-website/static/js/main.0fe5dc25.js.map",
     "787.1d45f1af.chunk.js.map": "/polymaze-website/static/js/787.1d45f1af.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de077d18.css",
-    "static/js/main.f296d1ba.js"
+    "static/js/main.0fe5dc25.js"
   ]
 }
