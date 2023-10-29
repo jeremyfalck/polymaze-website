@@ -2,6 +2,9 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import PolyMazeIcon from "../../assets/images/polymaze_logo.png";
 import { useNavigate } from "react-router-dom";
+import SpotifyLogo from "../../assets/images/spotify_logo.png";
+import YoutubeLogo from "../../assets/images/youtube_logo.png";
+import InstagramLogo from "../../assets/images/instagram_logo.svg";
 
 import paths from "../../constants/paths.json";
 import { ForwardedRef, forwardRef } from "react";
@@ -54,7 +57,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                       alt="Your Company"
                     />
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
+                  <div className="hidden sm:flex sm:flex-1 sm:ml-6">
                     <div className="flex space-x-4">
                       {navigation.map((item, position) => (
                         <a
@@ -74,6 +77,29 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                         </a>
                       ))}
                     </div>
+                  </div>
+                  <div className="hidden sm:flex sm:justify-end">
+                    <a
+                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
+                      href="https://open.spotify.com/intl-fr/artist/3Na8vjbjF6idXfqYNNkgWg"
+                      target="_blank"
+                    >
+                      <img className="m-auto  w-6" src={SpotifyLogo} />
+                    </a>
+                    <a
+                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
+                      href="https://www.youtube.com/channel/UC3WL9tVLviLhWUlwqX02GhQ"
+                      target="_blank"
+                    >
+                      <img className="m-auto w-6" src={YoutubeLogo} />
+                    </a>
+                    <a
+                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
+                      href="https://www.instagram.com/polymaze.music/"
+                      target="_blank"
+                    >
+                      <img className="m-auto  w-6" src={InstagramLogo} />
+                    </a>
                   </div>
                 </div>
               </div>
