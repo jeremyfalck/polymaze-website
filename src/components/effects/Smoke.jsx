@@ -28,7 +28,7 @@ export default class Smoke extends Component {
     light.position.set(-1, 0, 1);
     this.scene.add(light);
     this.smokeParticles = [];
-    let smokeTexture = new THREE.TextureLoader().load(
+    new THREE.TextureLoader().load(
       "https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/Smoke-Element.png",
       (smokeTexture) => {
         let smokeMaterial = new THREE.MeshLambertMaterial({

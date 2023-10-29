@@ -80,7 +80,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden absolute bg-black bg-opacity-80 w-full">
+            <Disclosure.Panel className="sm:hidden absolute bg-black bg-opacity-90 w-full">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item, position) => {
                   return (

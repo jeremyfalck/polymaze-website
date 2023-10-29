@@ -42,12 +42,12 @@ export default function Home() {
           height={dimensions.height - headerHeight}
         />
         <div
-          className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto "
+          className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto"
           style={{
             maxHeight: dimensions.height,
+            paddingTop: headerHeight,
           }}
         >
-          <div style={{ height: headerHeight }} />
           <BandHeader />
           <WhoAreWe />
           <MembersPresentation />
