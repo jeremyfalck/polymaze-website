@@ -1,6 +1,6 @@
 {
-    "root": "/polymaze-website",
-    "projects": "/polymaze-website/projects",
-    "team": "/polymaze-website/team",
-    "contact": "/polymaze-website/contact"
+    "root": "/",
+    "projects": "/projects",
+    "team": "/team",
+    "contact": "/contact"
 }

@@ -24,7 +24,6 @@ function classNames(...classes: string[]) {
 export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
   (props: NavBarProps, ref: ForwardedRef<HTMLDivElement>) => {
     const navigate = useNavigate();
-
     return (
       <Disclosure
         as="nav"
@@ -46,7 +45,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer">
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="h-8 w-auto hover:bg-gray-700 rounded-md p-2"
@@ -60,7 +59,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                       {navigation.map((item, position) => (
                         <a
                           key={item.name}
-                          href={item.href}
+                          href={"#" + item.href}
                           className={classNames(
                             position == props.index
                               ? "bg-gray-900 text-white"
