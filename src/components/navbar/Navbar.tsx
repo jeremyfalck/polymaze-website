@@ -14,8 +14,8 @@ interface NavBarProps {
 }
 
 const navigation = [
-  { name: "Accueil", href: paths.root, current: true },
   { name: "Nos Projets", href: paths.projects, current: false },
+  { name: "Le groupe", href: paths.band, current: true },
   { name: "Team", href: paths.team, current: false },
   { name: "Contacter", href: paths.contact, current: false },
 ];

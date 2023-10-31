@@ -1,9 +1,9 @@
 import React, { createRef, useLayoutEffect, useState } from "react";
 import { NavBar } from "../../navbar/Navbar";
 import Smoke from "../../effects/Smoke";
-import { BandHeader } from "../home/BandHeader";
-import { WhoAreWe } from "../home/WhoAreWe";
-import { MembersPresentation } from "../home/MembersPresentation";
+import { BandHeader } from "../band/BandHeader";
+import { WhoAreWe } from "../band/WhoAreWe";
+import { MembersPresentation } from "../band/MembersPresentation";
 
 export default function Projects() {
   const ref = createRef<HTMLDivElement>();
@@ -94,7 +94,7 @@ export default function Projects() {
             </div>
           </div>
         </div>
-        <NavBar index={1} ref={ref} />
+        <NavBar index={0} ref={ref} />
       </main>
     </>
   );

@@ -1,6 +1,6 @@
 {
-    "root": "/",
-    "projects": "/projects",
+    "projects": "/",
+    "band": "/band",
     "team": "/team",
     "contact": "/contact"
 }

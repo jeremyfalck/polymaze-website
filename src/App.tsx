@@ -1,15 +1,8 @@
 import React from "react";
 import "./App.css";
 
-import {
-  createBrowserRouter,
-  createHashRouter,
-  HashRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
-import Home from "./components/pages/home/Home";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import Band from "./components/pages/band/Band";
 import Projects from "./components/pages/projects/Projects";
 import Team from "./components/pages/team/Team";
 import Contact from "./components/pages/contact/Contact";
@@ -21,7 +14,7 @@ function App() {
       <div className="flex flex-col">
         <HashRouter>
           <Routes>
-            <Route path={paths.root} element={<Home />} />
+            <Route path={paths.band} element={<Band />} />
             <Route path={paths.projects} element={<Projects />} />
             <Route path={paths.team} element={<Team />} />
             <Route path={paths.contact} element={<Contact />} />
