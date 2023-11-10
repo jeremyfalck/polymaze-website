@@ -1,16 +1,10 @@
-import {
-  createRef,
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { createRef, useLayoutEffect, useState } from "react";
 import Smoke from "../../effects/Smoke";
 import { BandHeader } from "./BandHeader";
 import { MembersPresentation } from "./MembersPresentation";
 import { WhoAreWe } from "./WhoAreWe";
 import { NavBar } from "../../navbar/Navbar";
+import colors from "../../../assets/colors.json";
 
 export default function Band() {
   const getCurrentDimension = () => {
@@ -37,7 +31,7 @@ export default function Band() {
       <main className="bg-black overscroll-none overflow-hidden">
         <Smoke
           smokeOpacity="0.3"
-          smokeColor="#FFFFFF"
+          smokeColor={colors.purple}
           width={dimensions.width}
           height={dimensions.height - headerHeight}
         />

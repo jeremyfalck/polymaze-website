@@ -1,9 +1,7 @@
-import React, { createRef, useLayoutEffect, useState } from "react";
+import { createRef, useLayoutEffect, useState } from "react";
 import { NavBar } from "../../navbar/Navbar";
 import Smoke from "../../effects/Smoke";
-import { BandHeader } from "../band/BandHeader";
-import { WhoAreWe } from "../band/WhoAreWe";
-import { MembersPresentation } from "../band/MembersPresentation";
+import colors from "../../../assets/colors.json";
 
 export default function Projects() {
   const ref = createRef<HTMLDivElement>();
@@ -30,7 +28,7 @@ export default function Projects() {
       <main className="bg-black overscroll-none overflow-hidden">
         <Smoke
           smokeOpacity="0.3"
-          smokeColor="#FFFFFF"
+          smokeColor={colors.purple}
           width={dimensions.width}
           height={dimensions.height - headerHeight}
         />
@@ -62,7 +60,6 @@ export default function Projects() {
                 className="w-full lg:w-3/4 rounded-lg mx-auto sm:text-5xl sm:mx-0 px-6 sm:px-0"
                 src="https://open.spotify.com/embed/album/5auF6rrW1uOUA1VJpTESz1?utm_source=generator"
                 height="352"
-                frameBorder="0"
                 allowFullScreen
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
