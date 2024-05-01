@@ -1,20 +1,45 @@
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import PolyMazeIcon from "../../assets/images/polymaze_logo.png";
 import { useNavigate } from "react-router-dom";
-
+import SpotifyLogo from "../../assets/images/spotify_logo.png";
+import YoutubeLogo from "../../assets/images/youtube_logo.png";
+import InstagramLogo from "../../assets/images/instagram_logo.svg";
 import paths from "../../constants/paths.json";
 import { ForwardedRef, forwardRef } from "react";
+import SocialMediaLink, { SocialMediaLinkProps } from "./SocialMediaLink";
+import PolymazeIcon from "./PolymazeIcon";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface NavBarProps {
   index: number;
 }
 
 const navigation = [
-  { name: "Accueil", href: paths.root, current: true },
-  { name: "Nos Projets", href: paths.projects, current: false },
-  { name: "Team", href: paths.team, current: false },
-  { name: "Contacter", href: paths.contact, current: false },
+  {
+    name: "Nos Projets",
+    href: paths.projects,
+    isSiteLink: true,
+  },
+  { name: "Le groupe", href: paths.band, isSiteLink: true },
+  {
+    name: "Nous contacter",
+    href: "mailto:yolo@yolo.com",
+    isSiteLink: false,
+  },
+];
+
+const socialMediaLinks: SocialMediaLinkProps[] = [
+  {
+    url: "https://open.spotify.com/intl-fr/artist/3Na8vjbjF6idXfqYNNkgWg",
+    logo: SpotifyLogo,
+  },
+  {
+    url: "https://www.youtube.com/channel/UC3WL9tVLviLhWUlwqX02GhQ",
+    logo: YoutubeLogo,
+  },
+  {
+    url: "https://www.instagram.com/polymaze.music/",
+    logo: InstagramLogo,
+  },
 ];
 
 function classNames(...classes: string[]) {
@@ -24,7 +49,6 @@ function classNames(...classes: string[]) {
 export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
   (props: NavBarProps, ref: ForwardedRef<HTMLDivElement>) => {
     const navigate = useNavigate();
-
     return (
       <Disclosure
         as="nav"
@@ -33,9 +57,9 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
         {({ open }) => (
           <>
             <div className="mx-auto px-2 sm:px-6 lg:px-8" ref={ref}>
-              <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
+              <div className="relative flex h-16 items-center justify-between ">
+                {/* Mobile menu button*/}
+                <div className="flex items-center sm:hidden">
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -46,36 +70,34 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
-                    <img
-                      className="h-8 w-auto hover:bg-gray-700 rounded-md p-2"
-                      src={PolyMazeIcon}
-                      onClick={() => navigate(navigation[0].href)}
-                      alt="Your Company"
-                    />
+                <div className="flex flex-shrink-0 items-center">
+                  <PolymazeIcon onClickUrl={navigation[0].href} />
+                </div>
+                <div className="hidden sm:flex sm:flex-1 sm:ml-6 cursor-default">
+                  <div className="flex space-x-4">
+                    {navigation.map((item, position) => (
+                      <a
+                        key={item.name}
+                        href={item.isSiteLink ? "#" + item.href : item.href}
+                        className={classNames(
+                          position == props.index
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
+                        )}
+                        aria-current={
+                          position == props.index ? "page" : undefined
+                        }
+                      >
+                        {item.name}
+                      </a>
+                    ))}
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
-                      {navigation.map((item, position) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            position == props.index
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
-                          )}
-                          aria-current={
-                            position == props.index ? "page" : undefined
-                          }
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
+                </div>
+                <div className="flex flex-1 justify-end align-middle items-center self-stretch py-3">
+                  {socialMediaLinks.map((link) => (
+                    <SocialMediaLink url={link.url} logo={link.logo} />
+                  ))}
                 </div>
               </div>
             </div>
@@ -87,8 +109,13 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     <Disclosure.Button
                       key={item.name}
                       as="a"
-                      onClick={() => {
-                        navigate(item.href);
+                      onClick={(e) => {
+                        if (!item.isSiteLink) {
+                          window.location.href = item.href;
+                          e.preventDefault();
+                        } else {
+                          navigate(item.href);
+                        }
                       }}
                       className={classNames(
                         position == props.index

@@ -1,18 +1,12 @@
-import {
-  createRef,
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { createRef, useLayoutEffect, useState } from "react";
 import Smoke from "../../effects/Smoke";
 import { BandHeader } from "./BandHeader";
 import { MembersPresentation } from "./MembersPresentation";
 import { WhoAreWe } from "./WhoAreWe";
 import { NavBar } from "../../navbar/Navbar";
+import colors from "../../../assets/colors.json";
 
-export default function Home() {
+export default function Band() {
   const getCurrentDimension = () => {
     return {
       width: window.innerWidth,
@@ -37,7 +31,7 @@ export default function Home() {
       <main className="bg-black overscroll-none overflow-hidden">
         <Smoke
           smokeOpacity="0.3"
-          smokeColor="#FFFFFF"
+          smokeColor={colors.purple}
           width={dimensions.width}
           height={dimensions.height - headerHeight}
         />
@@ -52,7 +46,7 @@ export default function Home() {
           <WhoAreWe />
           <MembersPresentation />
         </div>
-        <NavBar index={0} ref={ref} />
+        <NavBar index={1} ref={ref} />
       </main>
     </>
   );
