@@ -15,14 +15,14 @@ interface NavBarProps {
 
 const navigation = [
   {
-    name: "Nos Projets",
+    name: "Nos projets",
     href: paths.projects,
     isSiteLink: true,
   },
   { name: "Le groupe", href: paths.band, isSiteLink: true },
   {
     name: "Nous contacter",
-    href: "mailto:yolo@yolo.com",
+    href: "mailto:polymazemusic@gmail.com",
     isSiteLink: false,
   },
 ];
@@ -80,13 +80,13 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                         key={item.name}
                         href={item.isSiteLink ? "#" + item.href : item.href}
                         className={classNames(
-                          position == props.index
+                          position === props.index
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
                         )}
                         aria-current={
-                          position == props.index ? "page" : undefined
+                          position === props.index ? "page" : undefined
                         }
                       >
                         {item.name}
@@ -118,13 +118,13 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                         }
                       }}
                       className={classNames(
-                        position == props.index
+                        position === props.index
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
                         "block rounded-md px-3 py-2 text-base font-medium bg-opacity-60"
                       )}
                       aria-current={
-                        position == props.index ? "page" : undefined
+                        position === props.index ? "page" : undefined
                       }
                     >
                       {item.name}

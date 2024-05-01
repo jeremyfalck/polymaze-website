@@ -8,8 +8,9 @@ const SocialMediaLink = ({ url, logo }: SocialMediaLinkProps) => (
     className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
     href={url}
     target="_blank"
+    rel="noreferrer noopener"
   >
-    <img className="m-auto w-6" src={logo} />
+    <img className="m-auto w-6" alt="Social Media" src={logo} />
   </a>
 );
 

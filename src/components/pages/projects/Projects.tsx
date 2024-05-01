@@ -64,6 +64,7 @@ export default function Projects() {
                 Nouveau single: Take your hand
               </p>
               <iframe
+                title="Take your hand"
                 className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0 "
                 height={152}
                 src="https://open.spotify.com/embed/album/3aLOe8ePJqIUMqUgNziMcV?utm_source=generator"
@@ -76,6 +77,7 @@ export default function Projects() {
                 Notre EP : Another Step
               </p>
               <iframe
+                title="Another Step"
                 className="w-full lg:w-3/4 rounded-lg mx-auto sm:text-5xl sm:mx-0 px-6 sm:px-0"
                 src="https://open.spotify.com/embed/album/5auF6rrW1uOUA1VJpTESz1?utm_source=generator"
                 height="352"
@@ -93,7 +95,7 @@ export default function Projects() {
               <div className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0">
                 {instagramPosts.map((post, index) => {
                   var className = "";
-                  if (index != 0) {
+                  if (index !== 0) {
                     className = "lg:hidden";
                   }
                   return (
