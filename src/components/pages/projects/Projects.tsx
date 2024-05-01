@@ -1,8 +1,14 @@
-import { createRef, useLayoutEffect, useState } from "react";
+import { createRef, useEffect, useLayoutEffect, useState } from "react";
 import { NavBar } from "../../navbar/Navbar";
 import { InstagramEmbed } from "react-social-media-embed";
 import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
+import {
+  YoutubeVideoConfig,
+  getInstagramPosts,
+  getYoutubeVideos,
+} from "../../../firebase/RemoteConfigManager";
+import YoutubeVideo from "./YoutubeVideo";
 
 export default function Projects() {
   const ref = createRef<HTMLDivElement>();
@@ -17,11 +23,23 @@ export default function Projects() {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [dimensions, setDimensions] = useState(getCurrentDimension());
 
+  const [instagramPosts, setInstagramPosts] = useState<string[]>([]);
+  const [youtubeVideos, setYoutubeVideos] = useState<YoutubeVideoConfig[]>([]);
+
   useLayoutEffect(() => {
     setHeaderHeight(
       ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
     );
     setDimensions(getCurrentDimension());
+  }, []);
+
+  useEffect(() => {
+    getInstagramPosts().then((posts) => setInstagramPosts(posts));
+    getYoutubeVideos().then((videos) =>
+      setYoutubeVideos(
+        videos.map((video) => ({ title: video.title, url: video.url }))
+      )
+    );
   }, []);
 
   return (
@@ -73,33 +91,30 @@ export default function Projects() {
               </p>
 
               <div className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0">
-                <InstagramEmbed url="https://www.instagram.com/p/C5-X4SFq7fn" />
+                {instagramPosts.map((post, index) => {
+                  var className = "";
+                  if (index != 0) {
+                    className = "lg:hidden";
+                  }
+                  return (
+                    <InstagramEmbed
+                      className={className}
+                      key={post}
+                      url={post}
+                    />
+                  );
+                })}
               </div>
             </div>
 
             <div className="flex-1 sm:px-6">
-              <p className="text-white order-first text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6">
-                Live au Nadir
-              </p>
-              <iframe
-                className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 px-6 sm:px-0"
-                style={{ aspectRatio: "16/9" }}
-                src="https://www.youtube.com/embed/nqe7BnNznPY?si=XJ7Pudh0rGLM7GAg"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-              <p className="text-white order-first text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6">
-                Live dans notre salon: Fondation
-              </p>
-              <iframe
-                className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 px-6 sm:px-0"
-                style={{ aspectRatio: "16/9" }}
-                src="https://www.youtube.com/embed/777ITCO7BSA?si=kyZamaVvm18iFmrq"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              {youtubeVideos.map((video) => (
+                <YoutubeVideo
+                  title={video.title}
+                  url={video.url}
+                  key={video.url}
+                />
+              ))}
             </div>
           </div>
         </div>

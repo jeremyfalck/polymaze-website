@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import { HashRouter, Route, Routes } from "react-router-dom";
@@ -7,6 +7,8 @@ import Projects from "./components/pages/projects/Projects";
 import Team from "./components/pages/team/Team";
 import Contact from "./components/pages/contact/Contact";
 import paths from "./constants/paths.json";
+import { firebaseApp } from "./firebase/FirebaseManager";
+import { FirebaseApp } from "@firebase/app";
 
 function App() {
   return (
