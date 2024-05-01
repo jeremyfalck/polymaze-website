@@ -1,13 +1,13 @@
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import PolyMazeIcon from "../../assets/images/polymaze_logo.png";
 import { useNavigate } from "react-router-dom";
 import SpotifyLogo from "../../assets/images/spotify_logo.png";
 import YoutubeLogo from "../../assets/images/youtube_logo.png";
 import InstagramLogo from "../../assets/images/instagram_logo.svg";
-
 import paths from "../../constants/paths.json";
 import { ForwardedRef, forwardRef } from "react";
+import SocialMediaLink, { SocialMediaLinkProps } from "./SocialMediaLink";
+import PolymazeIcon from "./PolymazeIcon";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface NavBarProps {
   index: number;
@@ -16,8 +16,21 @@ interface NavBarProps {
 const navigation = [
   { name: "Nos Projets", href: paths.projects, current: false },
   { name: "Le groupe", href: paths.band, current: true },
-  { name: "Team", href: paths.team, current: false },
-  { name: "Contacter", href: paths.contact, current: false },
+];
+
+const socialMediaLinks: SocialMediaLinkProps[] = [
+  {
+    url: "https://open.spotify.com/intl-fr/artist/3Na8vjbjF6idXfqYNNkgWg",
+    logo: SpotifyLogo,
+  },
+  {
+    url: "https://www.youtube.com/channel/UC3WL9tVLviLhWUlwqX02GhQ",
+    logo: YoutubeLogo,
+  },
+  {
+    url: "https://www.instagram.com/polymaze.music/",
+    logo: InstagramLogo,
+  },
 ];
 
 function classNames(...classes: string[]) {
@@ -35,9 +48,9 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
         {({ open }) => (
           <>
             <div className="mx-auto px-2 sm:px-6 lg:px-8" ref={ref}>
-              <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
+              <div className="relative flex h-16 items-center justify-between ">
+                {/* Mobile menu button*/}
+                <div className="flex items-center sm:hidden">
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -48,59 +61,34 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer">
-                  <div className="flex flex-shrink-0 items-center">
-                    <img
-                      className="h-8 w-auto hover:bg-gray-700 rounded-md p-2"
-                      src={PolyMazeIcon}
-                      onClick={() => navigate(navigation[0].href)}
-                      alt="Your Company"
-                    />
+                <div className="flex flex-shrink-0 items-center">
+                  <PolymazeIcon onClickUrl={navigation[0].href} />
+                </div>
+                <div className="hidden sm:flex sm:flex-1 sm:ml-6 cursor-default">
+                  <div className="flex space-x-4">
+                    {navigation.map((item, position) => (
+                      <a
+                        key={item.name}
+                        href={"#" + item.href}
+                        className={classNames(
+                          position == props.index
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
+                        )}
+                        aria-current={
+                          position == props.index ? "page" : undefined
+                        }
+                      >
+                        {item.name}
+                      </a>
+                    ))}
                   </div>
-                  <div className="hidden sm:flex sm:flex-1 sm:ml-6">
-                    <div className="flex space-x-4">
-                      {navigation.map((item, position) => (
-                        <a
-                          key={item.name}
-                          href={"#" + item.href}
-                          className={classNames(
-                            position == props.index
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
-                          )}
-                          aria-current={
-                            position == props.index ? "page" : undefined
-                          }
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="hidden sm:flex sm:justify-end">
-                    <a
-                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
-                      href="https://open.spotify.com/intl-fr/artist/3Na8vjbjF6idXfqYNNkgWg"
-                      target="_blank"
-                    >
-                      <img className="m-auto  w-6" src={SpotifyLogo} />
-                    </a>
-                    <a
-                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
-                      href="https://www.youtube.com/channel/UC3WL9tVLviLhWUlwqX02GhQ"
-                      target="_blank"
-                    >
-                      <img className="m-auto w-6" src={YoutubeLogo} />
-                    </a>
-                    <a
-                      className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
-                      href="https://www.instagram.com/polymaze.music/"
-                      target="_blank"
-                    >
-                      <img className="m-auto  w-6" src={InstagramLogo} />
-                    </a>
-                  </div>
+                </div>
+                <div className="flex flex-1 justify-end align-middle items-center self-stretch py-3">
+                  {socialMediaLinks.map((link) => (
+                    <SocialMediaLink url={link.url} logo={link.logo} />
+                  ))}
                 </div>
               </div>
             </div>
