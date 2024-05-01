@@ -1,5 +1,6 @@
 import { createRef, useLayoutEffect, useState } from "react";
 import { NavBar } from "../../navbar/Navbar";
+import { InstagramEmbed } from "react-social-media-embed";
 import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
 
@@ -40,7 +41,7 @@ export default function Projects() {
           }}
         >
           <div className="flex flex-col lg:flex-row">
-            <div className="flex-1">
+            <div className="flex-1 sm:px-6">
               <p className="text-white order-first text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6">
                 Nouveau single: Take your hand
               </p>
@@ -65,6 +66,17 @@ export default function Projects() {
                 loading="lazy"
               />
             </div>
+
+            <div className="flex-1 sm:px-6">
+              <p className="text-white order-first text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6">
+                Nos derniers posts
+              </p>
+
+              <div className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0">
+                <InstagramEmbed url="https://www.instagram.com/p/C5-X4SFq7fn" />
+              </div>
+            </div>
+
             <div className="flex-1 sm:px-6">
               <p className="text-white order-first text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6">
                 Live au Nadir
