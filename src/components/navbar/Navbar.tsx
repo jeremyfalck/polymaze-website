@@ -14,8 +14,17 @@ interface NavBarProps {
 }
 
 const navigation = [
-  { name: "Nos Projets", href: paths.projects, current: false },
-  { name: "Le groupe", href: paths.band, current: true },
+  {
+    name: "Nos Projets",
+    href: paths.projects,
+    isSiteLink: true,
+  },
+  { name: "Le groupe", href: paths.band, isSiteLink: true },
+  {
+    name: "Nous contacter",
+    href: "mailto:yolo@yolo.com",
+    isSiteLink: false,
+  },
 ];
 
 const socialMediaLinks: SocialMediaLinkProps[] = [
@@ -69,7 +78,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     {navigation.map((item, position) => (
                       <a
                         key={item.name}
-                        href={"#" + item.href}
+                        href={item.isSiteLink ? "#" + item.href : item.href}
                         className={classNames(
                           position == props.index
                             ? "bg-gray-900 text-white"
@@ -100,8 +109,13 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                     <Disclosure.Button
                       key={item.name}
                       as="a"
-                      onClick={() => {
-                        navigate(item.href);
+                      onClick={(e) => {
+                        if (!item.isSiteLink) {
+                          window.location.href = item.href;
+                          e.preventDefault();
+                        } else {
+                          navigate(item.href);
+                        }
                       }}
                       className={classNames(
                         position == props.index
