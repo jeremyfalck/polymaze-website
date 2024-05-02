@@ -55,7 +55,7 @@ const Concerts = () => {
           <Grid
             container
             spacing={6}
-            columns={{ xs: 2, sm: 2, md: 3 }}
+            columns={{ xs: 3, sm: 3, md: 5 }}
             className="p-4"
           >
             <Grid item xs={1} sm={1} md={1}>
@@ -64,16 +64,16 @@ const Concerts = () => {
               </p>
             </Grid>
 
-            <Grid item xs={1} sm={1} md={1}>
+            <Grid item xs={2} sm={2} md={2}>
               <p className="text-white text-3xl font-semibold tracking-tight">
                 Lieu
               </p>
             </Grid>
             <Grid
               item
-              xs={1}
-              sm={1}
-              md={1}
+              xs={2}
+              sm={2}
+              md={2}
               className="hidden md:flex md:flex-1"
             >
               <p className="text-white text-3xl font-semibold tracking-tight">
