@@ -21,6 +21,11 @@ const navigation = [
   },
   { name: "Le groupe", href: paths.band, isSiteLink: true },
   {
+    name: "Concerts",
+    href: paths.concerts,
+    isSiteLink: true,
+  },
+  {
     name: "Nous contacter",
     href: "mailto:polymazemusic@gmail.com",
     isSiteLink: false,

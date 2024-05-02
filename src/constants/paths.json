@@ -1,6 +1,5 @@
 {
     "projects": "/",
     "band": "/band",
-    "team": "/team",
-    "contact": "/contact"
+    "concerts": "/concerts"
 }
