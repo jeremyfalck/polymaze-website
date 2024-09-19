@@ -21,7 +21,12 @@ export interface ConcertConfig {
 
 const remoteConfig: RemoteConfig = getRemoteConfig(firebaseApp);
 
-remoteConfig.settings.minimumFetchIntervalMillis = 3600000;
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  console.log("development code, setting remote config interval to 1 minute");
+  remoteConfig.settings.minimumFetchIntervalMillis = 60000;
+} else {
+  // production code
+}
 
 remoteConfig.defaultConfig = {
   [INSTAGRAM_URLS_KEY]: "[]",

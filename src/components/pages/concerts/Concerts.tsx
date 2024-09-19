@@ -86,8 +86,9 @@ const Concerts = () => {
                   parseDate(concert2.date).getTime() -
                   parseDate(concert1.date).getTime()
               )
-              .map((concert: ConcertConfig) => (
+              .map((concert: ConcertConfig, index: number) => (
                 <ConcertItem
+                  key={concert.date + index.toString()}
                   date={concert.date}
                   place={concert.place}
                   city={concert.city}
