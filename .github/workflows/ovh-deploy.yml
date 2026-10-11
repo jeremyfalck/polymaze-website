@@ -16,12 +16,11 @@ jobs:
       - run: npm ci && npm run build
         env:
           CI: false
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OVH_FTP_HOST }}
-          protocol: ftps
-          port: 21
-          username: ${{ secrets.OVH_FTP_USER }}
-          password: ${{ secrets.OVH_FTP_PASSWORD }}
-          local-dir: ./build/
-          server-dir: ./www/
+      - name: Upload build to OVH over SFTP
+        env:
+          FTP_HOST: ${{ secrets.OVH_FTP_HOST }}
+          FTP_USER: ${{ secrets.OVH_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          sudo apt-get install -y lftp
+          lftp -u "$FTP_USER","$FTP_PASSWORD" -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror -R --delete --verbose build www; bye" sftp://"$FTP_HOST":22
