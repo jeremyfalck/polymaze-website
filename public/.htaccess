@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://polymaze.fr%{REQUEST_URI} [L,R=301]
+
+# Redirect www to apex
+RewriteCond %{HTTP_HOST} ^www\.polymaze\.fr$ [NC]
+RewriteRule ^ https://polymaze.fr%{REQUEST_URI} [L,R=301]
