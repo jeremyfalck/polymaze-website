@@ -1,5 +1,5 @@
-import { fireEvent, render } from "@testing-library/react";
-import { MemoryRouter, Route, useNavigate } from "react-router-dom";
+import { act, fireEvent, render } from "@testing-library/react";
+import { HashRouter, MemoryRouter, Route, useNavigate } from "react-router-dom";
 import AnimatedRoutes from "./AnimatedRoutes";
 
 const GoTo = ({ to }: { to: string }) => {
@@ -32,6 +32,23 @@ test("swaps the page inside a view transition when supported", () => {
   expect(start).toHaveBeenCalledTimes(1);
   expect(getByText("b")).toBeInTheDocument();
   expect(queryByText("a")).toBeNull();
+});
+
+test("follows plain #/path link navigation (HashRouter keeps key 'default')", async () => {
+  window.location.hash = "#/a";
+  const { findByText } = render(
+    <HashRouter>
+      <AnimatedRoutes>
+        <Route path="/a" element={<p>a</p>} />
+        <Route path="/b" element={<p>b</p>} />
+      </AnimatedRoutes>
+    </HashRouter>
+  );
+  await findByText("a");
+  act(() => {
+    window.location.hash = "#/b";
+  });
+  expect(await findByText("b")).toBeInTheDocument();
 });
 
 test("swaps instantly when the API is missing", () => {

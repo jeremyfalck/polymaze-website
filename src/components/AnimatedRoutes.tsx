@@ -11,7 +11,8 @@ const AnimatedRoutes = ({ children }: { children: ReactNode }) => {
   const [shown, setShown] = useState(location);
 
   useEffect(() => {
-    if (location.key === shown.key) return;
+    // Not location.key: hash-link navigations in HashRouter all keep key "default".
+    if (location.pathname === shown.pathname) return;
     const swap = () => flushSync(() => setShown(location));
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const start = (document as Doc).startViewTransition;
