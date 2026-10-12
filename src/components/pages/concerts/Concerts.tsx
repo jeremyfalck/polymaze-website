@@ -5,7 +5,7 @@ import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
 import { ConcertConfig, getConcerts } from "../../../sheets/SheetsManager";
 import ConcertItem from "./ConcertItem";
-import { Grid } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { parseDate } from "../../../utils/dateutils";
 
 const Concerts = () => {
@@ -31,6 +31,24 @@ const Concerts = () => {
     getConcerts().then(setConcerts);
   }, []);
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const byDate = (c1: ConcertConfig, c2: ConcertConfig) =>
+    parseDate(c1.date).getTime() - parseDate(c2.date).getTime();
+  const isUpcoming = (c: ConcertConfig) => parseDate(c.date) >= today;
+  const upcoming = concerts.filter(isUpcoming).sort(byDate);
+  const past = concerts
+    .filter((c) => !isUpcoming(c))
+    .sort((c1, c2) => byDate(c2, c1));
+  const renderConcert =
+    (isPast: boolean) => (concert: ConcertConfig, index: number) => (
+      <ConcertItem
+        key={concert.date + index.toString()}
+        {...concert}
+        past={isPast}
+      />
+    );
+
   return (
     <>
       <main className="bg-black overscroll-none overflow-hidden">
@@ -47,51 +65,23 @@ const Concerts = () => {
             paddingTop: headerHeight,
           }}
         >
-          <Grid
-            container
-            spacing={6}
-            columns={{ xs: 3, sm: 3, md: 5 }}
-            className="p-4"
-          >
-            <Grid item xs={1} sm={1} md={1}>
-              <p className="text-white text-3xl font-semibold tracking-tight">
-                Date
-              </p>
-            </Grid>
-
-            <Grid item xs={2} sm={2} md={2}>
-              <p className="text-white text-3xl font-semibold tracking-tight">
-                Lieu
-              </p>
-            </Grid>
-            <Grid
-              item
-              xs={2}
-              sm={2}
-              md={2}
-              className="hidden md:flex md:flex-1"
-            >
-              <p className="text-white text-3xl font-semibold tracking-tight">
-                Infos
-              </p>
-            </Grid>
-            {concerts
-              .sort(
-                (concert1, concert2) =>
-                  parseDate(concert2.date).getTime() -
-                  parseDate(concert1.date).getTime()
-              )
-              .map((concert: ConcertConfig, index: number) => (
-                <ConcertItem
-                  key={concert.date + index.toString()}
-                  date={concert.date}
-                  place={concert.place}
-                  city={concert.city}
-                  department={concert.department}
-                  description={concert.description}
-                />
-              ))}
-          </Grid>
+          <Stack spacing={2} className="max-w-3xl mx-auto p-4">
+            {upcoming.length === 0 && (
+              <Typography className="text-white">
+                Pas de concert prévu pour le moment
+              </Typography>
+            )}
+            {upcoming.map(renderConcert(false))}
+            {past.length > 0 && (
+              <Typography
+                variant="h5"
+                className="text-white font-semibold pt-4"
+              >
+                Passés
+              </Typography>
+            )}
+            {past.map(renderConcert(true))}
+          </Stack>
         </div>
         <NavBar index={2} ref={ref} />
       </main>

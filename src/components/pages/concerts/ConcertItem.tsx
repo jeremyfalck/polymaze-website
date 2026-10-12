@@ -1,5 +1,6 @@
-import { Divider, Grid } from "@mui/material";
-import { formatDate } from "../../../utils/dateutils";
+import { Box, Chip, Paper, Typography } from "@mui/material";
+import colors from "../../../assets/colors.json";
+import { parseDate } from "../../../utils/dateutils";
 
 interface ConcertItemProps {
   date: string;
@@ -7,6 +8,7 @@ interface ConcertItemProps {
   city: string;
   department: string;
   description: string;
+  past?: boolean;
 }
 
 const ConcertItem = ({
@@ -15,24 +17,68 @@ const ConcertItem = ({
   city,
   department,
   description,
-}: ConcertItemProps) => (
-  <>
-    <Grid item xs={1} sm={1} md={1}>
-      <p className="text-white font-semibold">{formatDate(date)}</p>
-    </Grid>
+  past = false,
+}: ConcertItemProps) => {
+  const d = parseDate(date);
+  const part = (opts: Intl.DateTimeFormatOptions) =>
+    d.toLocaleDateString("fr-FR", opts);
 
-    <Grid item xs={2} sm={2} md={2}>
-      <p className="text-white">
-        {place}, <b>{city}</b> ({department})
-      </p>
-    </Grid>
-    <Grid item xs={2} sm={2} md={2} className="hidden md:flex md:flex-1">
-      <p className="text-white">{description}</p>
-    </Grid>
-    <Grid item xs={5}>
-      <Divider orientation="horizontal" className="bg-white" flexItem />
-    </Grid>
-  </>
-);
+  return (
+    <Paper
+      elevation={0}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: { xs: 2, sm: 3 },
+        p: { xs: 2, sm: 3 },
+        color: "white",
+        backgroundColor: "rgba(255,255,255,0.05)",
+        backdropFilter: "blur(6px)",
+        border: "1px solid rgba(201,165,227,0.25)",
+        borderRadius: 3,
+        opacity: past ? 0.55 : 1,
+        transition: "all 0.2s ease",
+        "&:hover": {
+          opacity: 1,
+          transform: "translateY(-2px)",
+          borderColor: colors.purple,
+          boxShadow: `0 0 24px rgba(201,165,227,0.35)`,
+        },
+      }}
+    >
+      <Box sx={{ textAlign: "center", minWidth: 72, color: colors.purple }}>
+        <Typography sx={{ fontSize: 40, fontWeight: 700, lineHeight: 1 }}>
+          {part({ day: "numeric" })}
+        </Typography>
+        <Typography
+          sx={{ fontSize: 14, fontWeight: 600, textTransform: "uppercase" }}
+        >
+          {part({ month: "short" }).replace(".", "")}
+        </Typography>
+        <Typography sx={{ fontSize: 12, opacity: 0.7 }}>
+          {part({ year: "numeric" })}
+        </Typography>
+      </Box>
+
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Typography sx={{ fontSize: { xs: 18, sm: 22 }, fontWeight: 600 }}>
+          {place}
+        </Typography>
+        <Typography sx={{ opacity: 0.8 }}>
+          {city}
+          {department && ` (${department})`}
+        </Typography>
+      </Box>
+
+      {description && (
+        <Chip
+          label={description}
+          variant="outlined"
+          sx={{ color: colors.purple, borderColor: colors.purple }}
+        />
+      )}
+    </Paper>
+  );
+};
 
 export default ConcertItem;
