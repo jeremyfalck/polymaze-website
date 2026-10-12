@@ -74,7 +74,14 @@ const ConcertItem = ({
         <Chip
           label={description}
           variant="outlined"
-          sx={{ color: colors.purple, borderColor: colors.purple }}
+          sx={{
+            color: colors.purple,
+            borderColor: colors.purple,
+            maxWidth: "45%",
+            height: "auto",
+            py: 0.5,
+            "& .MuiChip-label": { whiteSpace: "normal", textAlign: "center" },
+          }}
         />
       )}
     </Paper>
