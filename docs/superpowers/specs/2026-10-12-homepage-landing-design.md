@@ -25,11 +25,11 @@ as `Band.tsx` (Smoke, scroll container, `useHeaderHeight`, `NavBar index={0}`).
   - Video is not rendered under `prefers-reduced-motion` or on narrow viewports (poster only).
 - Releases band: the two existing Spotify embeds (single and EP), moved unchanged.
 - `SocialWall.tsx`: heading "Nos derniers posts", glass cards in a grid
-  (1 col mobile, 2 tablet, 3 desktop). First 6 items shown, "Voir plus" reveals the rest.
+  (1 col mobile, 2 tablet, 3 desktop). Videos: all shown. Instagram: first 6, "Voir plus" reveals the rest.
 
 ### Data
 - Reuse `getInstagramPosts()` and `getYoutubeVideos()` from `SheetsManager.ts`, unchanged.
-- A pure `interleave(a, b)` merges them (IG, YT, IG, YT, ...; leftovers appended).
+- Videos and Instagram posts are shown in two separate lanes ("Vidéos", "Instagram"), each a homogeneous grid with `items-start`, so mixed card heights never leave gaps. This replaced the interleaved wall after seeing it live.
 - "Latest" = sheet order, top row newest. No date column is added.
 
 ### Performance and errors
@@ -42,7 +42,7 @@ Provided by the band: `public/hero.webm` and `public/hero.mp4`, landscape, 10-15
 muted, looping, about 3 MB max.
 
 ## Testing
-- One test for `interleave` (uneven lengths, empty inputs).
+- No unit test: the wall is presentational; the data functions are covered in `SheetsManager.test.ts`.
 - Visual check in the browser at mobile and desktop widths.
 
 ## Out of scope

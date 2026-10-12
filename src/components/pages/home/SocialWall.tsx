@@ -4,12 +4,8 @@ import { InstagramEmbed } from "react-social-media-embed";
 import {
   getInstagramPosts,
   getYoutubeVideos,
+  YoutubeVideoConfig,
 } from "../../../sheets/SheetsManager";
-import { interleave } from "./interleave";
-
-type WallItem =
-  | { kind: "instagram"; url: string }
-  | { kind: "youtube"; title: string; url: string };
 
 const FIRST_BATCH = 6;
 
@@ -65,67 +61,74 @@ const Card = ({
   </Paper>
 );
 
+const grid = "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-start";
+const subheading = "text-white text-xl font-semibold pb-4";
+
 export default function SocialWall() {
-  const [items, setItems] = useState<WallItem[]>([]);
+  const [posts, setPosts] = useState<string[]>([]);
+  const [videos, setVideos] = useState<YoutubeVideoConfig[]>([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    Promise.all([getInstagramPosts(), getYoutubeVideos()]).then(
-      ([posts, videos]) =>
-        setItems(
-          interleave<WallItem>(
-            posts.map((url) => ({ kind: "instagram", url })),
-            videos.map((v) => ({ kind: "youtube", ...v })),
-          ),
-        ),
-    );
+    getInstagramPosts().then(setPosts);
+    getYoutubeVideos().then(setVideos);
   }, []);
 
-  if (items.length === 0) return null;
+  if (posts.length === 0 && videos.length === 0) return null;
 
   return (
     <section className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <p className="text-white text-3xl font-semibold tracking-tight pb-6">
         Nos derniers posts
       </p>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.slice(0, showAll ? undefined : FIRST_BATCH).map((item) => (
-          <Card
-            key={`${item.kind}-${item.url}`}
-            flush={item.kind === "instagram"}
-          >
-            {item.kind === "youtube" ? (
-              <>
-                <p className="text-white text-lg font-semibold pb-3">
-                  {item.title}
-                </p>
+      {videos.length > 0 && (
+        <>
+          <p className={subheading}>Vidéos</p>
+          <div className={`${grid} pb-10`}>
+            {videos.map((video, i) => (
+              <Card key={`${video.url}-${i}`}>
+                {video.title && (
+                  <p className="text-white text-lg font-semibold pb-3">
+                    {video.title}
+                  </p>
+                )}
                 <iframe
                   className="w-full rounded-lg"
                   style={{ aspectRatio: "16/9" }}
-                  src={item.url}
-                  title={item.title || "YouTube video player"}
+                  src={video.url}
+                  title={video.title || "YouTube video player"}
                   loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
-              </>
-            ) : (
-              <LazyMount>
-                <InstagramEmbed url={item.url} width="100%" />
-              </LazyMount>
-            )}
-          </Card>
-        ))}
-      </div>
-      {items.length > FIRST_BATCH && !showAll && (
-        <div className="flex justify-center pt-6">
-          <button
-            className="px-6 py-3 rounded-md font-semibold text-white bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-colors"
-            onClick={() => setShowAll(true)}
-          >
-            Voir plus
-          </button>
-        </div>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
+      {posts.length > 0 && (
+        <>
+          <p className={subheading}>Instagram</p>
+          <div className={grid}>
+            {posts.slice(0, showAll ? undefined : FIRST_BATCH).map((url, i) => (
+              <Card key={`${url}-${i}`} flush>
+                <LazyMount>
+                  <InstagramEmbed url={url} width="100%" />
+                </LazyMount>
+              </Card>
+            ))}
+          </div>
+          {posts.length > FIRST_BATCH && !showAll && (
+            <div className="flex justify-center pt-6">
+              <button
+                className="px-6 py-3 rounded-md font-semibold text-white bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 transition-colors"
+                onClick={() => setShowAll(true)}
+              >
+                Voir plus
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
