@@ -69,22 +69,34 @@ export const parseCsv = (text: string): Record<string, string>[] => {
   );
 };
 
-export const fetchTab = async (
-  gid: string
-): Promise<Record<string, string>[]> => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}?gid=${gid}&single=true&output=csv`
-    );
-    if (!response.ok) {
-      console.log("cannot fetch sheet tab", gid, response.status);
+// Successful tabs are cached for the page's lifetime so switching pages doesn't
+// re-fetch; failures are not cached, so the next visit retries.
+const tabCache = new Map<string, Promise<Record<string, string>[]>>();
+
+export const clearTabCache = () => tabCache.clear();
+
+export const fetchTab = (gid: string): Promise<Record<string, string>[]> => {
+  const cached = tabCache.get(gid);
+  if (cached) return cached;
+  const request = (async () => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}?gid=${gid}&single=true&output=csv`
+      );
+      if (!response.ok) {
+        console.log("cannot fetch sheet tab", gid, response.status);
+        tabCache.delete(gid);
+        return [];
+      }
+      return parseCsv(await response.text());
+    } catch (e) {
+      console.log("cannot fetch sheet tab", gid, e);
+      tabCache.delete(gid);
       return [];
     }
-    return parseCsv(await response.text());
-  } catch (e) {
-    console.log("cannot fetch sheet tab", gid, e);
-    return [];
-  }
+  })();
+  tabCache.set(gid, request);
+  return request;
 };
 
 export const getInstagramPosts = async (): Promise<string[]> =>

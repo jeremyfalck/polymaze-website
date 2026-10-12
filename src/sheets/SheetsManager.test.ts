@@ -1,4 +1,5 @@
 import {
+  clearTabCache,
   fetchTab,
   getConcerts,
   getInstagramPosts,
@@ -6,6 +7,8 @@ import {
   parseCsv,
   toYoutubeEmbedUrl,
 } from "./SheetsManager";
+
+beforeEach(clearTabCache);
 
 describe("parseCsv", () => {
   it("handles CRLF and no trailing newline", () => {
@@ -41,6 +44,25 @@ describe("fetchTab", () => {
     global.fetch = f;
     expect(await fetchTab("0")).toEqual([{ url: "a" }]);
     expect(f.mock.calls[0][0]).toContain("gid=0&single=true&output=csv");
+  });
+  it("fetches a tab once, then serves it from cache", async () => {
+    const f = jest
+      .fn()
+      .mockResolvedValue({ ok: true, text: async () => "url\na" });
+    global.fetch = f;
+    await fetchTab("0");
+    await fetchTab("0");
+    expect(f).toHaveBeenCalledTimes(1);
+  });
+  it("retries after a failure", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("down"));
+    await fetchTab("0");
+    const f = jest
+      .fn()
+      .mockResolvedValue({ ok: true, text: async () => "url\na" });
+    global.fetch = f;
+    expect(await fetchTab("0")).toEqual([{ url: "a" }]);
+    expect(f).toHaveBeenCalledTimes(1);
   });
 });
 

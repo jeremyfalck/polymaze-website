@@ -18,9 +18,11 @@ function App() {
       <div className="flex flex-col">
         <HashRouter>
           <PersistentSmoke />
-          <AnimatedRoutes>
+          <AnimatedRoutes
+            persistent={{ path: paths.projects, element: <Home /> }}
+          >
             <Route path={paths.band} element={<Band />} />
-            <Route path={paths.projects} element={<Home />} />
+            <Route path={paths.projects} element={null} />
             <Route path={paths.concerts} element={<Concerts />} />
           </AnimatedRoutes>
         </HashRouter>

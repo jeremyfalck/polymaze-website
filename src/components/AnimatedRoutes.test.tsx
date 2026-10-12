@@ -56,3 +56,20 @@ test("swaps instantly when the API is missing", () => {
   fireEvent.click(getByText("go"));
   expect(getByText("b")).toBeInTheDocument();
 });
+
+test("keeps the persistent page mounted, hidden off its path", () => {
+  const { getByText, queryByText } = render(
+    <MemoryRouter initialEntries={["/a"]}>
+      <GoTo to="/b" />
+      <AnimatedRoutes persistent={{ path: "/a", element: <p>home</p> }}>
+        <Route path="/a" element={null} />
+        <Route path="/b" element={<p>b</p>} />
+      </AnimatedRoutes>
+    </MemoryRouter>
+  );
+  expect(getByText("home")).toBeVisible();
+  fireEvent.click(getByText("go"));
+  expect(getByText("b")).toBeInTheDocument();
+  expect(queryByText("home")).toBeInTheDocument();
+  expect(getByText("home")).not.toBeVisible();
+});

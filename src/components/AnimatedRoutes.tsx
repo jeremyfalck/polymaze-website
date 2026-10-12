@@ -6,7 +6,15 @@ type Doc = { startViewTransition?: (update: () => void) => unknown };
 
 // Renders the route tree one navigation behind the router and swaps it inside a
 // View Transition (styled in App.css). Browsers without the API swap instantly.
-const AnimatedRoutes = ({ children }: { children: ReactNode }) => {
+// `persistent` is mounted once and only hidden off its path, so its iframes,
+// embeds and scroll position survive navigation (give its path a null Route).
+const AnimatedRoutes = ({
+  children,
+  persistent,
+}: {
+  children: ReactNode;
+  persistent?: { path: string; element: ReactNode };
+}) => {
   const location = useLocation();
   const [shown, setShown] = useState(location);
 
@@ -20,7 +28,20 @@ const AnimatedRoutes = ({ children }: { children: ReactNode }) => {
     else swap();
   }, [location, shown]);
 
-  return <Routes location={shown}>{children}</Routes>;
+  return (
+    <>
+      {persistent && (
+        <div
+          style={{
+            display: shown.pathname === persistent.path ? undefined : "none",
+          }}
+        >
+          {persistent.element}
+        </div>
+      )}
+      <Routes location={shown}>{children}</Routes>
+    </>
+  );
 };
 
 export default AnimatedRoutes;
