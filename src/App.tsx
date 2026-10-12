@@ -7,6 +7,7 @@ import Home from "./components/pages/home/Home";
 import Concerts from "./components/pages/concerts/Concerts";
 import BackToTop from "./components/BackToTop";
 import CustomScrollbar from "./components/CustomScrollbar";
+import SmoothScroll from "./components/SmoothScroll";
 import paths from "./constants/paths.json";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         </HashRouter>
         <BackToTop />
         <CustomScrollbar />
+        <SmoothScroll />
       </div>
     </React.StrictMode>
   );
