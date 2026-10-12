@@ -47,7 +47,7 @@ export const Hero = ({ headerHeight }: { headerHeight: number }) => (
       </p>
       <div className="flex flex-wrap justify-center gap-4">
         <a
-          className={`${buttonClass} bg-[#c9a5e3] !text-black hover:bg-[#d8bdee]`}
+          className={`${buttonClass} bg-[rgba(201,165,227,0.35)] backdrop-blur-md backdrop-saturate-150 border border-[rgba(201,165,227,0.6)] hover:bg-[rgba(201,165,227,0.5)]`}
           href="https://open.spotify.com/album/3aLOe8ePJqIUMqUgNziMcV"
           target="_blank"
           rel="noreferrer noopener"
