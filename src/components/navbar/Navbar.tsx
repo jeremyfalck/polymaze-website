@@ -15,7 +15,7 @@ interface NavBarProps {
 
 const navigation = [
   {
-    name: "Nos projets",
+    name: "Accueil",
     href: paths.projects,
     isSiteLink: true,
   },
