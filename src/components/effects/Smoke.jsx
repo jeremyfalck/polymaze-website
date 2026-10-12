@@ -64,10 +64,18 @@ export default class Smoke extends Component {
     // let tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     // let windowHeight = height;
 
-    this.animate(this);
+    if (!this.props.paused) this.animate();
   }
   componentDidUpdate(prevProps) {
-    const { width, height } = this.props;
+    const { width, height, paused } = this.props;
+    if (prevProps.paused !== paused) {
+      if (paused) {
+        cancelAnimationFrame(this.frameId);
+      } else {
+        this.clock.getDelta(); // drop the paused time so the smoke doesn't jump
+        this.animate();
+      }
+    }
     if (prevProps.width === width && prevProps.height === height) return;
     this.renderer.setSize(width, height);
     this.camera.aspect = width / height;

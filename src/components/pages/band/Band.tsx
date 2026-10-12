@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import Smoke from "../../effects/Smoke";
 import { BandHeader } from "./BandHeader";
 import { MembersPresentation } from "./MembersPresentation";
 import { WhoAreWe } from "./WhoAreWe";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
-import colors from "../../../assets/colors.json";
 
 export default function Band() {
   const getCurrentDimension = () => {
@@ -26,13 +24,7 @@ export default function Band() {
 
   return (
     <>
-      <main className="bg-black overscroll-none overflow-hidden">
-        <Smoke
-          smokeOpacity="0.3"
-          smokeColor={colors.purple}
-          width={dimensions.width}
-          height={dimensions.height}
-        />
+      <main className="overscroll-none overflow-hidden">
         <div
           className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto"
           style={{

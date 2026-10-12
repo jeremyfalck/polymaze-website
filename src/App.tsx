@@ -8,6 +8,7 @@ import Concerts from "./components/pages/concerts/Concerts";
 import BackToTop from "./components/BackToTop";
 import CustomScrollbar from "./components/CustomScrollbar";
 import SmoothScroll from "./components/SmoothScroll";
+import PersistentSmoke from "./components/effects/PersistentSmoke";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import paths from "./constants/paths.json";
 
@@ -16,6 +17,7 @@ function App() {
     <React.StrictMode>
       <div className="flex flex-col">
         <HashRouter>
+          <PersistentSmoke />
           <AnimatedRoutes>
             <Route path={paths.band} element={<Band />} />
             <Route path={paths.projects} element={<Home />} />
