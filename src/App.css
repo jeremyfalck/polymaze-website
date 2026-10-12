@@ -39,9 +39,15 @@
 
 /*
  * Page transition (see AnimatedRoutes): stage blinds. The screen is 8 vertical
- * slats; the old page's slats close onto lilac, then the new page's open out of it.
- * Slat width is mask-size, so the bars grow from the left edge of each column.
+ * slats (mask tiles, 12.5vw each); --open is how much of every tile is visible.
+ * The old page's slats close onto lilac, then the new page's open out of it.
  */
+@property --open {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
 ::view-transition-group(root) {
   background: #c9a5e3;
   animation-duration: 0s;
@@ -50,8 +56,10 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
-  -webkit-mask-image: linear-gradient(#000, #000);
-  mask-image: linear-gradient(#000, #000);
+  -webkit-mask-image: linear-gradient(90deg, #000 var(--open), transparent var(--open));
+  mask-image: linear-gradient(90deg, #000 var(--open), transparent var(--open));
+  -webkit-mask-size: 12.5vw 100%;
+  mask-size: 12.5vw 100%;
   -webkit-mask-repeat: repeat-x;
   mask-repeat: repeat-x;
   animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
@@ -70,23 +78,20 @@
 }
 
 @keyframes blinds-close {
-  from { -webkit-mask-size: 12.5vw 100%; mask-size: 12.5vw 100%; }
-  to   { -webkit-mask-size: 0 100%;      mask-size: 0 100%; }
+  from { --open: 100%; }
+  to   { --open: 0%; }
 }
 
 @keyframes blinds-open {
-  from { -webkit-mask-size: 0 100%;      mask-size: 0 100%; }
-  to   { -webkit-mask-size: 12.5vw 100%; mask-size: 12.5vw 100%; }
+  from { --open: 0%; }
+  to   { --open: 100%; }
 }
 
 /* Narrow screens: 4 slats instead of 8 so they stay readable. */
 @media (max-width: 640px) {
-  @keyframes blinds-close {
-    from { -webkit-mask-size: 25vw 100%; mask-size: 25vw 100%; }
-    to   { -webkit-mask-size: 0 100%;    mask-size: 0 100%; }
-  }
-  @keyframes blinds-open {
-    from { -webkit-mask-size: 0 100%;    mask-size: 0 100%; }
-    to   { -webkit-mask-size: 25vw 100%; mask-size: 25vw 100%; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    -webkit-mask-size: 25vw 100%;
+    mask-size: 25vw 100%;
   }
 }
