@@ -3,6 +3,7 @@ import {
   getInstagramPosts,
   getYoutubeVideos,
   parseCsv,
+  toYoutubeEmbedUrl,
 } from "./SheetsManager";
 
 describe("parseCsv", () => {
@@ -45,7 +46,8 @@ describe("fetchTab", () => {
 describe("content getters", () => {
   const csvByGid: Record<string, string> = {
     "0": "url\nhttps://i/1\n\nhttps://i/2",
-    "2012695307": "title,url\nT,U\nNoUrl,",
+    "2012695307":
+      "title,url\nT,https://youtu.be/abc\nNoUrl,",
   };
   beforeEach(() => {
     global.fetch = jest.fn().mockImplementation(async (url: string) => ({
@@ -61,11 +63,33 @@ describe("content getters", () => {
     expect(await getInstagramPosts()).toEqual(["https://i/1", "https://i/2"]);
   });
   it("getYoutubeVideos drops rows with empty url", async () => {
-    expect(await getYoutubeVideos()).toEqual([{ title: "T", url: "U" }]);
+    expect(await getYoutubeVideos()).toEqual([
+      { title: "T", url: "https://www.youtube.com/embed/abc" },
+    ]);
   });
   it("both resolve [] when fetch rejects", async () => {
     global.fetch = jest.fn().mockRejectedValue(new Error("down"));
     expect(await getInstagramPosts()).toEqual([]);
     expect(await getYoutubeVideos()).toEqual([]);
+  });
+});
+
+describe("toYoutubeEmbedUrl", () => {
+  const embed = "https://www.youtube.com/embed/kvWPXNdRN9k";
+  it.each([
+    "https://www.youtube.com/watch?v=kvWPXNdRN9k&list=PL1&index=4",
+    "https://youtu.be/kvWPXNdRN9k?si=abc",
+    "https://www.youtube.com/embed/watch?v=kvWPXNdRN9k&list=PL1",
+    "https://www.youtube.com/embed/kvWPXNdRN9k",
+    "https://www.youtube.com/shorts/kvWPXNdRN9k",
+    "https://m.youtube.com/watch?v=kvWPXNdRN9k",
+  ])("converts %s", (url) => {
+    expect(toYoutubeEmbedUrl(url)).toBe(embed);
+  });
+  it("returns unrecognised input unchanged", () => {
+    expect(toYoutubeEmbedUrl("not a url")).toBe("not a url");
+    expect(toYoutubeEmbedUrl("https://vimeo.com/123")).toBe(
+      "https://vimeo.com/123"
+    );
   });
 });
