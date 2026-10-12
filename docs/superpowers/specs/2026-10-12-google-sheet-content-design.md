@@ -10,15 +10,17 @@ Google Sheet instead of hand-writing JSON in the Firebase Remote Config console.
 - Concerts UI lives on `feature/shows` (not merged). This work must not break it.
 
 ## Design
-- One Google Sheet, "Publish to web" per tab as CSV. Tabs, header row required:
+- One Google Sheet, published to the web (whole document). Each tab is fetched as CSV by its
+  `gid`: `<base>/pub?gid=<gid>&single=true&output=csv`. Tabs, header row required:
   - `instagram`: `url`
   - `youtube`: `title`, `url`
   - `concerts` (consumed by `feature/shows`): `date` (dd/mm/yyyy), `place`, `city`, `department`, `description`
 - `src/sheets/SheetsManager.ts` (new):
-  - `fetchTab(name): Promise<Record<string,string>[]>` fetches the published CSV, parses it
+  - `fetchTab(gid): Promise<Record<string,string>[]>` fetches the published CSV, parses it
     (small quoted-field-aware parser, no dependency) into rows keyed by header, drops blank rows.
   - `getInstagramPosts()` and `getYoutubeVideos()` built on it, same signatures as today.
-  - Sheet ID is a code constant (public, not secret).
+  - Published base URL and tab gids (instagram `0`, youtube `2012695307`, concerts `1390539612`)
+    are code constants (public, not secret).
 - `Projects.tsx` imports those two functions from `SheetsManager` instead of `RemoteConfigManager`.
 - Errors: fetch failure or bad row logs and yields `[]`/skips the row; page never breaks.
 - Freshness: Google caches published CSV ~5 min (was up to 1h).
@@ -31,4 +33,4 @@ Google Sheet instead of hand-writing JSON in the Firebase Remote Config console.
 - Admin UI, schema validation library, offline cache.
 
 ## Docs
-README gets the band-facing steps: edit sheet, File > Share > Publish to web per tab.
+README gets the band-facing steps: edit the sheet; publishing is already on for the whole document, new tabs need their gid added in code.
