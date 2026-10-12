@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { UIEvent, useEffect, useRef, useState } from "react";
 import Smoke from "../../effects/Smoke";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 import colors from "../../../assets/colors.json";
-import { Hero } from "./Hero";
+import { Hero, HeroBackground } from "./Hero";
 import SocialWall from "./SocialWall";
 
 const headingClass =
@@ -19,6 +19,15 @@ export default function Home() {
 
   const [dimensions, setDimensions] = useState(getCurrentDimension());
   const [ref, headerHeight] = useHeaderHeight();
+  const scrimRef = useRef<HTMLDivElement>(null);
+
+  // Dim the fixed video as the content scrolls over it (0 -> 0.7 over one screen).
+  const onScroll = (e: UIEvent<HTMLDivElement>) => {
+    if (scrimRef.current)
+      scrimRef.current.style.opacity = String(
+        Math.min(e.currentTarget.scrollTop / dimensions.height, 1) * 0.7,
+      );
+  };
 
   useEffect(() => {
     const onResize = () => setDimensions(getCurrentDimension());
@@ -28,6 +37,7 @@ export default function Home() {
 
   return (
     <main className="bg-black overscroll-none overflow-hidden">
+      <HeroBackground scrimRef={scrimRef} />
       <Smoke
         smokeOpacity="0.3"
         smokeColor={colors.purple}
@@ -37,6 +47,7 @@ export default function Home() {
       <div
         className="w-full absolute top-0 left-0 overscroll-contain overflow-y-auto"
         style={{ maxHeight: dimensions.height, paddingTop: headerHeight }}
+        onScroll={onScroll}
       >
         <Hero headerHeight={headerHeight} />
         <section className="max-w-5xl mx-auto py-6 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6">

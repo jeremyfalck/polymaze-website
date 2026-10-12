@@ -8,7 +8,7 @@ export default class Smoke extends Component {
 
     //Three.js setup
     this.clock = new THREE.Clock();
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setSize(width, height);
 
     this.scene = new THREE.Scene();

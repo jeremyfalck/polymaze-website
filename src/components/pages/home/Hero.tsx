@@ -1,17 +1,18 @@
+import type { Ref } from "react";
 import Collage from "../../../assets/images/polymaze_collage.png";
 import PolymazeLogoWhite from "../../../assets/images/polymaze_logo.png";
 
 const buttonClass =
   "px-6 py-3 rounded-md font-semibold text-white transition-colors";
 
-export const Hero = ({ headerHeight }: { headerHeight: number }) => (
-  <section
-    className="relative w-full overflow-hidden bg-cover bg-center"
-    style={{
-      height: `calc(100vh - ${headerHeight}px)`,
-      minHeight: 480,
-      backgroundImage: `url(${Collage})`,
-    }}
+export const HeroBackground = ({
+  scrimRef,
+}: {
+  scrimRef: Ref<HTMLDivElement>;
+}) => (
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{ backgroundImage: `url(${Collage})` }}
   >
     {/* Poster only on narrow viewports and with reduced motion. */}
     <video
@@ -25,7 +26,16 @@ export const Hero = ({ headerHeight }: { headerHeight: number }) => (
       <source src={`${process.env.PUBLIC_URL}/hero.webm`} type="video/webm" />
       <source src={`${process.env.PUBLIC_URL}/hero.mp4`} type="video/mp4" />
     </video>
-    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black" />
+    <div className="absolute inset-0 bg-black/40" />
+    <div ref={scrimRef} className="absolute inset-0 bg-black opacity-0" />
+  </div>
+);
+
+export const Hero = ({ headerHeight }: { headerHeight: number }) => (
+  <section
+    className="relative w-full"
+    style={{ height: `calc(100vh - ${headerHeight}px)`, minHeight: 480 }}
+  >
     <div className="relative h-full flex flex-col items-center justify-center gap-6 px-6 text-center">
       <img
         className="w-8/12 sm:w-4/12"
