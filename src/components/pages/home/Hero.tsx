@@ -11,7 +11,7 @@ export const HeroBackground = ({
   scrimRef: Ref<HTMLDivElement>;
 }) => (
   <div
-    className="absolute inset-0 bg-cover bg-center"
+    className="fixed inset-0 bg-cover bg-center"
     style={{ backgroundImage: `url(${Collage})` }}
   >
     {/* Poster only on narrow viewports and with reduced motion. */}
