@@ -30,6 +30,7 @@ const navigation = [
     href: "mailto:polymazemusic@gmail.com",
     isSiteLink: false,
   },
+  { name: "Mentions légales", href: paths.legal, isSiteLink: true },
 ];
 
 const socialMediaLinks: SocialMediaLinkProps[] = [
