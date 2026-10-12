@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import Band from "./components/pages/band/Band";
 import Home from "./components/pages/home/Home";
 import Concerts from "./components/pages/concerts/Concerts";
@@ -17,11 +17,9 @@ function App() {
       <div className="flex flex-col">
         <HashRouter>
           <AnimatedRoutes>
-            <Routes>
-              <Route path={paths.band} element={<Band />} />
-              <Route path={paths.projects} element={<Home />} />
-              <Route path={paths.concerts} element={<Concerts />} />
-            </Routes>
+            <Route path={paths.band} element={<Band />} />
+            <Route path={paths.projects} element={<Home />} />
+            <Route path={paths.concerts} element={<Concerts />} />
           </AnimatedRoutes>
         </HashRouter>
         <BackToTop />
