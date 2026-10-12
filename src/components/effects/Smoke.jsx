@@ -58,6 +58,7 @@ export default class Smoke extends Component {
       }
     );
 
+    this.renderer.domElement.style.display = "block";
     this.mount.appendChild(this.renderer.domElement);
     // remember these initial values
     // let tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
@@ -96,7 +97,7 @@ export default class Smoke extends Component {
   };
   render() {
     return (
-      <div className="absolute top-0 left-0 w-full h-full"
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden"
       ref={(mount) => {
           this.mount = mount;
         }}

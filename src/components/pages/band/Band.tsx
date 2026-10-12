@@ -1,9 +1,10 @@
-import { createRef, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Smoke from "../../effects/Smoke";
 import { BandHeader } from "./BandHeader";
 import { MembersPresentation } from "./MembersPresentation";
 import { WhoAreWe } from "./WhoAreWe";
 import { NavBar } from "../../navbar/Navbar";
+import useHeaderHeight from "../../navbar/useHeaderHeight";
 import colors from "../../../assets/colors.json";
 
 export default function Band() {
@@ -15,22 +16,10 @@ export default function Band() {
   };
 
   const [dimensions, setDimensions] = useState(getCurrentDimension());
-  const [headerHeight, setHeaderHeight] = useState(0);
+  const [ref, headerHeight] = useHeaderHeight();
 
-  const ref = createRef<HTMLDivElement>();
-
-  useLayoutEffect(() => {
-    setHeaderHeight(
-      ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
-    );
-    setDimensions(getCurrentDimension());
-
-    const onResize = () => {
-      setHeaderHeight(
-        ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
-      );
-      setDimensions(getCurrentDimension());
-    };
+  useEffect(() => {
+    const onResize = () => setDimensions(getCurrentDimension());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -42,7 +31,7 @@ export default function Band() {
           smokeOpacity="0.3"
           smokeColor={colors.purple}
           width={dimensions.width}
-          height={dimensions.height - headerHeight}
+          height={dimensions.height}
         />
         <div
           className="mx-auto py-6 sm:px-6 lg:px-8 w-full flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto"

@@ -1,5 +1,6 @@
-import { createRef, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavBar } from "../../navbar/Navbar";
+import useHeaderHeight from "../../navbar/useHeaderHeight";
 import { InstagramEmbed } from "react-social-media-embed";
 import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
@@ -11,8 +12,6 @@ import {
 import YoutubeVideo from "./YoutubeVideo";
 
 export default function Projects() {
-  const ref = createRef<HTMLDivElement>();
-
   const getCurrentDimension = () => {
     return {
       width: window.innerWidth,
@@ -20,24 +19,14 @@ export default function Projects() {
     };
   };
 
-  const [headerHeight, setHeaderHeight] = useState(0);
+  const [ref, headerHeight] = useHeaderHeight();
   const [dimensions, setDimensions] = useState(getCurrentDimension());
 
   const [instagramPosts, setInstagramPosts] = useState<string[]>([]);
   const [youtubeVideos, setYoutubeVideos] = useState<YoutubeVideoConfig[]>([]);
 
-  useLayoutEffect(() => {
-    setHeaderHeight(
-      ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
-    );
-    setDimensions(getCurrentDimension());
-
-    const onResize = () => {
-      setHeaderHeight(
-        ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
-      );
-      setDimensions(getCurrentDimension());
-    };
+  useEffect(() => {
+    const onResize = () => setDimensions(getCurrentDimension());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -58,7 +47,7 @@ export default function Projects() {
           smokeOpacity="0.3"
           smokeColor={colors.purple}
           width={dimensions.width}
-          height={dimensions.height - headerHeight}
+          height={dimensions.height}
         />
         <div
           className="w-full mx-auto py-6 sm:px-6 lg:px-8 flex-1 flex-col justify-center absolute top-0 left-0 overscroll-contain overflow-y-auto"
