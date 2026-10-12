@@ -1,4 +1,15 @@
-import type { YoutubeVideoConfig } from "../firebase/RemoteConfigManager";
+export interface YoutubeVideoConfig {
+  title: string;
+  url: string;
+}
+
+export interface ConcertConfig {
+  date: string;
+  place: string;
+  city: string;
+  department: string;
+  description: string;
+}
 
 const BASE_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQf1AzFwx46osZhKNAbyZKpgzgtcBr2iZfh0ggf1KMAyx6Igr4QyVPCBFIloRO7WCnHxvIcoN4g9H6P/pub";
@@ -105,3 +116,15 @@ export const getYoutubeVideos = async (): Promise<YoutubeVideoConfig[]> =>
   (await fetchTab(GIDS.youtube))
     .filter((row) => row.url)
     .map((row) => ({ title: row.title, url: toYoutubeEmbedUrl(row.url) }));
+
+// Rows need a dd/mm/yyyy date and a place; department and description may be empty.
+export const getConcerts = async (): Promise<ConcertConfig[]> =>
+  (await fetchTab(GIDS.concerts))
+    .filter((row) => /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(row.date) && row.place)
+    .map((row) => ({
+      date: row.date,
+      place: row.place,
+      city: row.city ?? "",
+      department: row.department ?? "",
+      description: row.description ?? "",
+    }));

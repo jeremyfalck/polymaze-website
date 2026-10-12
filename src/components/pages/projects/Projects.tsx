@@ -4,8 +4,8 @@ import useHeaderHeight from "../../navbar/useHeaderHeight";
 import { InstagramEmbed } from "react-social-media-embed";
 import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
-import { YoutubeVideoConfig } from "../../../firebase/RemoteConfigManager";
 import {
+  YoutubeVideoConfig,
   getInstagramPosts,
   getYoutubeVideos,
 } from "../../../sheets/SheetsManager";

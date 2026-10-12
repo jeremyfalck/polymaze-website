@@ -1,5 +1,6 @@
 import {
   fetchTab,
+  getConcerts,
   getInstagramPosts,
   getYoutubeVideos,
   parseCsv,
@@ -91,5 +92,46 @@ describe("toYoutubeEmbedUrl", () => {
     expect(toYoutubeEmbedUrl("https://vimeo.com/123")).toBe(
       "https://vimeo.com/123"
     );
+  });
+});
+
+describe("getConcerts", () => {
+  afterEach(() => {
+    delete (global as any).fetch;
+  });
+  it("returns valid rows and skips ones without a proper date or place", async () => {
+    const csv = [
+      "date,place,city,department,description",
+      "20/04/2024,Garden party,Orléans,45,Privée",
+      "bad,Nowhere,X,1,y",
+      "21/04/2024,,Y,2,z",
+      "22/04/2024,Bar,Tours,37,",
+    ].join("\n");
+    global.fetch = jest
+      .fn()
+      .mockResolvedValue({ ok: true, text: async () => csv });
+    expect(await getConcerts()).toEqual([
+      {
+        date: "20/04/2024",
+        place: "Garden party",
+        city: "Orléans",
+        department: "45",
+        description: "Privée",
+      },
+      {
+        date: "22/04/2024",
+        place: "Bar",
+        city: "Tours",
+        department: "37",
+        description: "",
+      },
+    ]);
+    expect((global.fetch as jest.Mock).mock.calls[0][0]).toContain(
+      "gid=1390539612"
+    );
+  });
+  it("resolves [] when fetch rejects", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("down"));
+    expect(await getConcerts()).toEqual([]);
   });
 });
