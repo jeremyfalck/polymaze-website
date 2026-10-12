@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# Polymaze website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website of the band Polymaze, built with [Create React App](https://github.com/facebook/create-react-app) (React, TypeScript, Tailwind, `HashRouter`).
 
-## Available Scripts
+## Local development
 
-In the project directory, you can run:
+```bash
+npm ci
+npm start      # http://localhost:3000
+npm test
+npm run build  # production build in ./build
+```
 
-### `npm start`
+## Environments
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Environment | URL | Branch | Hosting |
+|---|---|---|---|
+| Production | https://polymaze.fr | `main` | OVH (free 100M web hosting, bundled with the domain) |
+| Debug | https://jeremyfalck.github.io/polymaze-website | `debug` | GitHub Pages (`gh-pages` branch) |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Branching and release flow
 
-### `npm test`
+```
+feat/* or fix/*  ->  develop  ->  debug  ->  main
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Day-to-day work happens on `develop`; feature and fix branches are merged into it.
+- Merge `develop` into `debug` to publish the debug version and check it online.
+- Merge `debug` into `main` **only when releasing to production**: every push to `main` deploys to https://polymaze.fr.
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Both deployments are GitHub Actions workflows in `.github/workflows/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Production: `ovh-deploy.yml` (push to `main`, or manual run)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. `npm ci && npm run build` (with `CI=false` so existing lint warnings do not fail the build).
+2. Uploads `build/` to the `www/` folder of the OVH hosting with `lftp` over **SFTP** (port 22). The free OVH plan does not support FTPS, and plain FTP is unencrypted.
+   `mirror --delete` makes `www/` an exact copy of the build.
 
-### `npm run eject`
+Required repository secrets (Settings -> Secrets and variables -> Actions):
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+| Secret | Value |
+|---|---|
+| `OVH_FTP_HOST` | `ftp.cluster129.hosting.ovh.net` |
+| `OVH_FTP_USER` | FTP login of the hosting (OVH panel -> Web hosting -> FTP-SSH) |
+| `OVH_FTP_PASSWORD` | password of that FTP user |
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`public/.htaccess` is copied into the build and, on OVH's Apache, redirects HTTP to HTTPS and `www.polymaze.fr` to `polymaze.fr`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Debug: `gh-pages-debug.yml` (push to `debug`, or manual run)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Builds with `PUBLIC_URL=https://jeremyfalck.github.io/polymaze-website` (the site lives under a sub-path on GitHub Pages) and pushes `build/` to the `gh-pages` branch. GitHub Pages must be configured to serve that branch (Settings -> Pages).
 
-## Learn More
+The workflow can also be started manually from the Actions tab on any branch, which is handy to test a feature branch online.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### The `homepage` field
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`package.json` sets `"homepage": "https://polymaze.fr"`, which is the base path of the production build. The debug workflow overrides it with `PUBLIC_URL`.
+
+## OVH hosting and domain
+
+- Domain `polymaze.fr` and the free hosting are managed in the OVH manager (Web Cloud -> Hebergements web).
+- The domain must be attached to the hosting (Multisite tab, root folder `www`) with the free Let's Encrypt SSL certificate enabled (SSL tab).
+- **The free hosting must stay renewed**: keep the renewal on automatic, otherwise OVH deletes it.
