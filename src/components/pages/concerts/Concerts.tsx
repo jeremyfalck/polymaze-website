@@ -42,6 +42,14 @@ const Concerts = () => {
   const past = loaded
     .filter((c) => !isUpcoming(c))
     .sort((c1, c2) => byDate(c2, c1));
+  // past is sorted newest first, so each year's group is contiguous.
+  const pastByYear = past.reduce<[number, ConcertConfig[]][]>((groups, c) => {
+    const year = parseDate(c.date).getFullYear();
+    const last = groups[groups.length - 1];
+    if (last && last[0] === year) last[1].push(c);
+    else groups.push([year, [c]]);
+    return groups;
+  }, []);
   const renderConcert =
     (isPast: boolean) => (concert: ConcertConfig, index: number) => (
       <ConcertItem
@@ -84,7 +92,18 @@ const Concerts = () => {
                 Passés
               </Typography>
             )}
-            {past.map(renderConcert(true))}
+            {pastByYear.map(([year, items]) => (
+              <Stack key={year} spacing={2}>
+                <Typography
+                  variant="h6"
+                  className="font-semibold"
+                  sx={{ color: colors.purple, pt: 1 }}
+                >
+                  {year}
+                </Typography>
+                {items.map(renderConcert(true))}
+              </Stack>
+            ))}
           </Stack>
         </div>
         <NavBar index={2} ref={ref} />
