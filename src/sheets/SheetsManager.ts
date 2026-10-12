@@ -1,3 +1,5 @@
+import type { YoutubeVideoConfig } from "../firebase/RemoteConfigManager";
+
 const BASE_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQf1AzFwx46osZhKNAbyZKpgzgtcBr2iZfh0ggf1KMAyx6Igr4QyVPCBFIloRO7WCnHxvIcoN4g9H6P/pub";
 
@@ -73,3 +75,11 @@ export const fetchTab = async (
     return [];
   }
 };
+
+export const getInstagramPosts = async (): Promise<string[]> =>
+  (await fetchTab(GIDS.instagram)).map((row) => row.url).filter(Boolean);
+
+export const getYoutubeVideos = async (): Promise<YoutubeVideoConfig[]> =>
+  (await fetchTab(GIDS.youtube))
+    .filter((row) => row.url)
+    .map((row) => ({ title: row.title, url: row.url }));

@@ -1,4 +1,9 @@
-import { fetchTab, parseCsv } from "./SheetsManager";
+import {
+  fetchTab,
+  getInstagramPosts,
+  getYoutubeVideos,
+  parseCsv,
+} from "./SheetsManager";
 
 describe("parseCsv", () => {
   it("handles CRLF and no trailing newline", () => {
@@ -34,5 +39,33 @@ describe("fetchTab", () => {
     global.fetch = f;
     expect(await fetchTab("0")).toEqual([{ url: "a" }]);
     expect(f.mock.calls[0][0]).toContain("gid=0&single=true&output=csv");
+  });
+});
+
+describe("content getters", () => {
+  const csvByGid: Record<string, string> = {
+    "0": "url\nhttps://i/1\n\nhttps://i/2",
+    "2012695307": "title,url\nT,U\nNoUrl,",
+  };
+  beforeEach(() => {
+    global.fetch = jest.fn().mockImplementation(async (url: string) => ({
+      ok: true,
+      text: async () => csvByGid[/gid=(\d+)/.exec(url)![1]],
+    }));
+  });
+  afterEach(() => {
+    delete (global as any).fetch;
+  });
+
+  it("getInstagramPosts returns urls in sheet order", async () => {
+    expect(await getInstagramPosts()).toEqual(["https://i/1", "https://i/2"]);
+  });
+  it("getYoutubeVideos drops rows with empty url", async () => {
+    expect(await getYoutubeVideos()).toEqual([{ title: "T", url: "U" }]);
+  });
+  it("both resolve [] when fetch rejects", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("down"));
+    expect(await getInstagramPosts()).toEqual([]);
+    expect(await getYoutubeVideos()).toEqual([]);
   });
 });

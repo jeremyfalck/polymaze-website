@@ -4,11 +4,11 @@ import useHeaderHeight from "../../navbar/useHeaderHeight";
 import { InstagramEmbed } from "react-social-media-embed";
 import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
+import { YoutubeVideoConfig } from "../../../firebase/RemoteConfigManager";
 import {
-  YoutubeVideoConfig,
   getInstagramPosts,
   getYoutubeVideos,
-} from "../../../firebase/RemoteConfigManager";
+} from "../../../sheets/SheetsManager";
 import YoutubeVideo from "./YoutubeVideo";
 
 export default function Projects() {

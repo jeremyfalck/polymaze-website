@@ -2,6 +2,12 @@
 
 Website of the band Polymaze, built with [Create React App](https://github.com/facebook/create-react-app) (React, TypeScript, Tailwind, `HashRouter`).
 
+## Editing site content
+
+Instagram posts and YouTube videos come from a published Google Sheet (tabs `instagram`: `url`; `youtube`: `title`, `url`; `concerts`: `date, place, city, department, description`).
+Edit the sheet; changes show on the site within ~5 minutes. Publishing is on for the whole document;
+a new tab needs its `gid` added to `GIDS` in `src/sheets/SheetsManager.ts`.
+
 ## Local development
 
 ```bash
