@@ -18,13 +18,14 @@ code {
     monospace;
 }
 
-/* Scrollbar: a floating gradient pill that fattens on hover.
-   Chrome 121+ ignores ::-webkit-scrollbar when scrollbar-width/color are set,
-   so those standard properties are only used where WebKit styling is unsupported (Firefox). */
-@supports not selector(::-webkit-scrollbar) {
+/* Scrollbar: a floating gradient pill that fattens on hover (WebKit/Blink).
+   Chrome 121+ ignores ::-webkit-scrollbar when scrollbar-width/color are set, so those
+   standard properties are scoped to Firefox, which accepts ::-webkit-* selectors
+   for compat yet never renders them (so @supports selector() can't tell them apart). */
+@supports (-moz-appearance: none) {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(201, 165, 227, 0.55) transparent;
+    scrollbar-color: #c9a5e3 rgba(255, 255, 255, 0.04);
   }
 }
 
