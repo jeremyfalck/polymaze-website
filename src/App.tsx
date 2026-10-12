@@ -8,6 +8,7 @@ import Concerts from "./components/pages/concerts/Concerts";
 import BackToTop from "./components/BackToTop";
 import CustomScrollbar from "./components/CustomScrollbar";
 import SmoothScroll from "./components/SmoothScroll";
+import AnimatedRoutes from "./components/AnimatedRoutes";
 import paths from "./constants/paths.json";
 
 function App() {
@@ -15,11 +16,13 @@ function App() {
     <React.StrictMode>
       <div className="flex flex-col">
         <HashRouter>
-          <Routes>
-            <Route path={paths.band} element={<Band />} />
-            <Route path={paths.projects} element={<Home />} />
-            <Route path={paths.concerts} element={<Concerts />} />
-          </Routes>
+          <AnimatedRoutes>
+            <Routes>
+              <Route path={paths.band} element={<Band />} />
+              <Route path={paths.projects} element={<Home />} />
+              <Route path={paths.concerts} element={<Concerts />} />
+            </Routes>
+          </AnimatedRoutes>
         </HashRouter>
         <BackToTop />
         <CustomScrollbar />
