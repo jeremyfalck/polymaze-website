@@ -1,0 +1,28 @@
+name: Deploy debug build to GitHub Pages
+on:
+  push:
+    branches:
+      - debug
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gh-pages-debug
+  cancel-in-progress: true
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci && npm run build
+        env:
+          CI: false
+          PUBLIC_URL: https://jeremyfalck.github.io/polymaze-website
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          branch: gh-pages
