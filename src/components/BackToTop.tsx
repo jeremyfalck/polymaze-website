@@ -45,7 +45,7 @@ const BackToTop = () => {
       aria-label="Retour en haut"
       onClick={goTop}
       tabIndex={visible ? 0 : -1}
-      className={`fixed bottom-4 right-4 z-50 rounded-full p-3 text-white bg-white/10 backdrop-blur-md border border-[#c9a5e340] hover:bg-white/20 hover:border-[#c9a5e3] focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-200 ${
+      className={`fixed bottom-6 right-6 sm:right-10 z-50 rounded-full p-3 text-white bg-white/10 backdrop-blur-md border border-[#c9a5e340] hover:bg-white/20 hover:border-[#c9a5e3] focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-200 ${
         visible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
