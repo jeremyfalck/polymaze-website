@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "https://jeremyfalck.github.io/polymaze-website/static/css/main.57919f26.css",
-    "main.js": "https://jeremyfalck.github.io/polymaze-website/static/js/main.07ff2faf.js",
+    "main.css": "https://jeremyfalck.github.io/polymaze-website/static/css/main.6a6db0f7.css",
+    "main.js": "https://jeremyfalck.github.io/polymaze-website/static/js/main.a28cf476.js",
     "static/js/787.1d45f1af.chunk.js": "https://jeremyfalck.github.io/polymaze-website/static/js/787.1d45f1af.chunk.js",
     "static/media/instagram_logo.svg": "https://jeremyfalck.github.io/polymaze-website/static/media/instagram_logo.39973d93921f387378eb95cb209f4ad7.svg",
     "static/media/polymaze_collage.png": "https://jeremyfalck.github.io/polymaze-website/static/media/polymaze_collage.5f52ccdf7c337e8bc453.png",
@@ -9,12 +9,12 @@
     "static/media/thibaut_photo.png": "https://jeremyfalck.github.io/polymaze-website/static/media/thibaut_photo.b358ddff9e6ba3cb5e57.png",
     "static/media/spotify_logo.png": "https://jeremyfalck.github.io/polymaze-website/static/media/spotify_logo.cd66b8f63f6566194c7e.png",
     "index.html": "https://jeremyfalck.github.io/polymaze-website/index.html",
-    "main.57919f26.css.map": "https://jeremyfalck.github.io/polymaze-website/static/css/main.57919f26.css.map",
-    "main.07ff2faf.js.map": "https://jeremyfalck.github.io/polymaze-website/static/js/main.07ff2faf.js.map",
+    "main.6a6db0f7.css.map": "https://jeremyfalck.github.io/polymaze-website/static/css/main.6a6db0f7.css.map",
+    "main.a28cf476.js.map": "https://jeremyfalck.github.io/polymaze-website/static/js/main.a28cf476.js.map",
     "787.1d45f1af.chunk.js.map": "https://jeremyfalck.github.io/polymaze-website/static/js/787.1d45f1af.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.57919f26.css",
-    "static/js/main.07ff2faf.js"
+    "static/css/main.6a6db0f7.css",
+    "static/js/main.a28cf476.js"
   ]
 }
