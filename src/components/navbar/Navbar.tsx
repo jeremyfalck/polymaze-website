@@ -57,7 +57,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
     return (
       <Disclosure
         as="nav"
-        className="bg-white/5 backdrop-blur-xl backdrop-saturate-150 border-b border-[#c9a5e340] flex-none absolute top-0 left-0 w-full"
+        className="site-nav bg-white/5 backdrop-blur-xl backdrop-saturate-150 border-b border-[#c9a5e340] flex-none absolute top-0 left-0 w-full"
       >
         {({ open }) => (
           <>

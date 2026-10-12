@@ -42,6 +42,17 @@
  * and fades out while the new one resolves out of the same frost. The slight
  * scale hides the blur's transparent edges.
  */
+/* The navbar gets its own transition group so it stays out of the frosted page
+   snapshot. It uses the browser's default crossfade (additive, so the links
+   don't dim); an instant swap made its glass tint jump for one frame. */
+.site-nav {
+  view-transition-name: site-nav;
+}
+
+::view-transition-group(site-nav) {
+  animation-duration: 250ms;
+}
+
 ::view-transition-group(root) {
   background: #000;
   animation-duration: 0s;
@@ -50,7 +61,7 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
-  animation-duration: 650ms;
+  animation-duration: 420ms;
   animation-fill-mode: both;
 }
 
