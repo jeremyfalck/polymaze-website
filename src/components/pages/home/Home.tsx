@@ -1,8 +1,6 @@
 import { UIEvent, useEffect, useRef, useState } from "react";
-import Smoke from "../../effects/Smoke";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
-import colors from "../../../assets/colors.json";
 import { Hero, HeroBackground } from "./Hero";
 import SocialWall from "./SocialWall";
 
@@ -38,12 +36,6 @@ export default function Home() {
   return (
     <main className="bg-black overscroll-none overflow-hidden">
       <HeroBackground scrimRef={scrimRef} />
-      <Smoke
-        smokeOpacity="0.3"
-        smokeColor={colors.purple}
-        width={dimensions.width}
-        height={dimensions.height}
-      />
       <div
         className="w-full absolute top-0 left-0 overscroll-contain overflow-y-auto"
         style={{ maxHeight: dimensions.height, paddingTop: headerHeight }}
