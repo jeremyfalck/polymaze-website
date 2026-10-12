@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LegalLink from "../../LegalLink";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 import colors from "../../../assets/colors.json";
@@ -98,6 +99,7 @@ const Concerts = () => {
               </Stack>
             ))}
           </Stack>
+          <LegalLink />
         </div>
         <NavBar index={2} ref={ref} />
       </main>

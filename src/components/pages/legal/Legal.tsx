@@ -93,7 +93,7 @@ const Legal = () => {
           </Section>
         </div>
       </div>
-      <NavBar index={4} ref={ref} />
+      <NavBar index={-1} ref={ref} />
     </main>
   );
 };
