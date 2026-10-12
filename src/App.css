@@ -38,60 +38,45 @@
 }
 
 /*
- * Page transition (see AnimatedRoutes): stage blinds. The screen is 8 vertical
- * slats (mask tiles, 12.5vw each); --open is how much of every tile is visible.
- * The old page's slats close onto lilac, then the new page's open out of it.
+ * Page transition (see AnimatedRoutes): frosted glass. The old page blurs, hazes
+ * and fades out while the new one resolves out of the same frost. The slight
+ * scale hides the blur's transparent edges.
  */
-@property --open {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 100%;
-}
-
 ::view-transition-group(root) {
-  background: #c9a5e3;
+  background: #000;
   animation-duration: 0s;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
-  -webkit-mask-image: linear-gradient(90deg, #000 var(--open), transparent var(--open));
-  mask-image: linear-gradient(90deg, #000 var(--open), transparent var(--open));
-  -webkit-mask-size: 12.5vw 100%;
-  mask-size: 12.5vw 100%;
-  -webkit-mask-repeat: repeat-x;
-  mask-repeat: repeat-x;
-  animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+  animation-duration: 650ms;
   animation-fill-mode: both;
 }
 
 ::view-transition-old(root) {
-  animation-name: blinds-close;
-  animation-duration: 340ms;
+  animation-name: frost-out;
+  animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.4);
 }
 
 ::view-transition-new(root) {
-  animation-name: blinds-open;
-  animation-duration: 380ms;
-  animation-delay: 280ms;
+  animation-name: frost-in;
+  animation-timing-function: cubic-bezier(0.1, 0.6, 0.5, 1);
 }
 
-@keyframes blinds-close {
-  from { --open: 100%; }
-  to   { --open: 0%; }
+/* Old page stays opaque underneath and the new one fades in on top, so the
+   crossfade never dips dark. */
+@keyframes frost-out {
+  to {
+    filter: blur(28px) brightness(1.35) saturate(1.3);
+    transform: scale(1.05);
+  }
 }
 
-@keyframes blinds-open {
-  from { --open: 0%; }
-  to   { --open: 100%; }
-}
-
-/* Narrow screens: 4 slats instead of 8 so they stay readable. */
-@media (max-width: 640px) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    -webkit-mask-size: 25vw 100%;
-    mask-size: 25vw 100%;
+@keyframes frost-in {
+  from {
+    filter: blur(28px) brightness(1.35) saturate(1.3);
+    transform: scale(1.05);
+    opacity: 0;
   }
 }
