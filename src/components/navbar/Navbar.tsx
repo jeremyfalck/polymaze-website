@@ -86,14 +86,18 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                         href={item.isSiteLink ? "#" + item.href : item.href}
                         className={classNames(
                           position === props.index
-                            ? "bg-[#c9a5e3]/15 text-[#c9a5e3]"
+                            ? "text-[#c9a5e3]"
                             : "text-gray-300 hover:bg-white/10 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          "relative isolate rounded-md px-3 py-2 text-sm font-medium transition-colors",
                         )}
                         aria-current={
                           position === props.index ? "page" : undefined
                         }
                       >
+                        {position === props.index && (
+                          // Named in App.css so it glides between links on page change.
+                          <span className="nav-pill absolute inset-0 -z-10 rounded-md bg-[rgba(201,165,227,0.15)]" />
+                        )}
                         {item.name}
                       </a>
                     ))}

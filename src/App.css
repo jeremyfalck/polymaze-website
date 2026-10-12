@@ -53,6 +53,17 @@
   animation-duration: 250ms;
 }
 
+/* The active-link highlight is its own group, so the browser glides it between
+   the old and new link positions/widths. */
+.nav-pill {
+  view-transition-name: nav-pill;
+}
+
+::view-transition-group(nav-pill) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.1, 1);
+}
+
 ::view-transition-group(root) {
   background: #000;
   animation-duration: 0s;
