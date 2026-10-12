@@ -24,6 +24,15 @@ export default function Band() {
       ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
     );
     setDimensions(getCurrentDimension());
+
+    const onResize = () => {
+      setHeaderHeight(
+        ref.current && ref.current.clientHeight ? ref.current.clientHeight : 0
+      );
+      setDimensions(getCurrentDimension());
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (

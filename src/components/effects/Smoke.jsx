@@ -65,6 +65,13 @@ export default class Smoke extends Component {
 
     this.animate(this);
   }
+  componentDidUpdate(prevProps) {
+    const { width, height } = this.props;
+    if (prevProps.width === width && prevProps.height === height) return;
+    this.renderer.setSize(width, height);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+  }
   componentWillUnmount() {
     cancelAnimationFrame(this.frameId);
 
@@ -72,7 +79,7 @@ export default class Smoke extends Component {
   }
   animate = () => {
     this.delta = this.clock.getDelta();
-    requestAnimationFrame(this.animate);
+    this.frameId = requestAnimationFrame(this.animate);
     this.evolveSmoke();
     this.mesh.rotation.x += 0.005;
     this.mesh.rotation.y += 0.01;
