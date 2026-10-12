@@ -90,7 +90,7 @@ export default function Projects() {
                 Nos derniers posts
               </p>
 
-              <div className="w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0">
+              <div className="relative w-full lg:w-3/4 rounded-lg mx-auto sm:mx-0 sm:text-5xl px-6 sm:px-0">
                 {instagramPosts.map((post, index) => {
                   var className = "";
                   if (index !== 0) {
