@@ -1,0 +1,32 @@
+<!-- @dsCard height=288 -->
+<style>
+  html,body{margin:0;background:var(--ground)}
+  .cover{position:relative;width:960px;height:288px;overflow:hidden;background:var(--ground)}
+  svg{position:absolute;left:0;top:0}
+  .purple{fill:var(--purple)}
+  .ink{fill:var(--ink)}
+  .muted{fill:var(--ink-muted)}
+  .slab{rx:var(--radius-card)}
+  .cut{stroke:var(--ground);stroke-width:8;fill:none}
+  .wall{stroke:var(--purple);stroke-width:8;fill:none}
+  h1{position:absolute;left:32px;bottom:64px;margin:0;font:700 80px/.95 var(--font-sans, sans-serif);color:var(--ink)}
+  p{position:absolute;left:32px;bottom:32px;margin:0;width:400px;font:400 14px/20px var(--font-sans, sans-serif);color:var(--ink-muted)}
+</style>
+<!--
+blocks: purple 240x176 slab, ink 112x128, ink-muted 112x144, purple 96x256 bleeding off the right edge
+arrangement: staggered stack right of x=480, one tall slab bleeding off the right edge
+pattern: literal motif (the maze logo) -> right-angle walls, 8px strokes on a 16px pitch, cut out of the big slab and continued below it
+steps and radii: space-1/space-2 pitch, radius-card on every block
+-->
+<div class="cover">
+  <svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+    <rect class="purple slab" x="480" y="0" width="240" height="176"/>
+    <rect class="ink slab" x="736" y="0" width="112" height="128"/>
+    <rect class="muted slab" x="736" y="144" width="112" height="144"/>
+    <rect class="purple slab" x="864" y="32" width="96" height="256"/>
+    <path class="cut" d="M496 16H560V64H512V112H624V32H704V160H656V96"/>
+    <path class="wall" d="M480 208H576V272H624V224H688V272H720"/>
+  </svg>
+  <h1>Polymaze</h1>
+  <p>Du rock à trois, pour retrouver l'expérience d'un concert live.</p>
+</div>
