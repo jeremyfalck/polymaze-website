@@ -5,6 +5,7 @@ import Smoke from "../../effects/Smoke";
 import colors from "../../../assets/colors.json";
 import { ConcertConfig, getConcerts } from "../../../sheets/SheetsManager";
 import ConcertItem from "./ConcertItem";
+import ConcertSkeleton from "./ConcertSkeleton";
 import { Stack, Typography } from "@mui/material";
 import { parseDate } from "../../../utils/dateutils";
 
@@ -19,7 +20,7 @@ const Concerts = () => {
   const [ref, headerHeight] = useHeaderHeight();
   const [dimensions, setDimensions] = useState(getCurrentDimension());
 
-  const [concerts, setConcerts] = useState([] as ConcertConfig[]);
+  const [concerts, setConcerts] = useState<ConcertConfig[] | null>(null);
 
   useEffect(() => {
     const onResize = () => setDimensions(getCurrentDimension());
@@ -36,8 +37,9 @@ const Concerts = () => {
   const byDate = (c1: ConcertConfig, c2: ConcertConfig) =>
     parseDate(c1.date).getTime() - parseDate(c2.date).getTime();
   const isUpcoming = (c: ConcertConfig) => parseDate(c.date) >= today;
-  const upcoming = concerts.filter(isUpcoming).sort(byDate);
-  const past = concerts
+  const loaded = concerts ?? [];
+  const upcoming = loaded.filter(isUpcoming).sort(byDate);
+  const past = loaded
     .filter((c) => !isUpcoming(c))
     .sort((c1, c2) => byDate(c2, c1));
   const renderConcert =
@@ -66,7 +68,9 @@ const Concerts = () => {
           }}
         >
           <Stack spacing={2} className="max-w-3xl mx-auto p-4">
-            {upcoming.length === 0 && (
+            {concerts === null &&
+              [0, 1, 2].map((i) => <ConcertSkeleton key={i} />)}
+            {concerts !== null && upcoming.length === 0 && (
               <Typography className="text-white">
                 Pas de concert prévu pour le moment
               </Typography>
