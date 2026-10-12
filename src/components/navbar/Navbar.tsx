@@ -57,7 +57,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
     return (
       <Disclosure
         as="nav"
-        className="bg-black bg-opacity-80 flex-none absolute top-0 left-0 w-full"
+        className="bg-white/5 backdrop-blur-xl backdrop-saturate-150 border-b border-[#c9a5e340] flex-none absolute top-0 left-0 w-full"
       >
         {({ open }) => (
           <>
@@ -65,7 +65,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
               <div className="relative flex h-16 items-center justify-between ">
                 {/* Mobile menu button*/}
                 <div className="flex items-center sm:hidden">
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -86,9 +86,9 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                         href={item.isSiteLink ? "#" + item.href : item.href}
                         className={classNames(
                           position === props.index
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium bg-opacity-60"
+                            ? "bg-[#c9a5e3]/15 text-[#c9a5e3]"
+                            : "text-gray-300 hover:bg-white/10 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                         )}
                         aria-current={
                           position === props.index ? "page" : undefined
@@ -107,7 +107,7 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden absolute bg-black bg-opacity-90 w-full">
+            <Disclosure.Panel className="sm:hidden absolute bg-black/80 border-b border-[#c9a5e340] w-full">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item, position) => {
                   return (
@@ -124,9 +124,9 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
                       }}
                       className={classNames(
                         position === props.index
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:bg-opacity-60 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium bg-opacity-60"
+                          ? "bg-[#c9a5e3]/15 text-[#c9a5e3]"
+                          : "text-gray-300 hover:bg-white/10 hover:text-white",
+                        "block rounded-md px-3 py-2 text-base font-medium transition-colors",
                       )}
                       aria-current={
                         position === props.index ? "page" : undefined
@@ -142,5 +142,5 @@ export const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
         )}
       </Disclosure>
     );
-  }
+  },
 );

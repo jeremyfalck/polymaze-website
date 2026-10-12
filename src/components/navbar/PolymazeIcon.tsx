@@ -9,7 +9,7 @@ const PolymazeIcon = ({ onClickUrl }: PolymazeIconProps) => {
   const navigate = useNavigate();
   return (
     <img
-      className="h-8 w-auto hover:bg-gray-700 rounded-md p-2"
+      className="h-8 w-auto transition-colors hover:bg-white/10 rounded-md p-2"
       src={Icon}
       onClick={() => navigate(onClickUrl)}
       alt="Your Company"

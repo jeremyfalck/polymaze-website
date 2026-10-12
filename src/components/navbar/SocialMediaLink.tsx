@@ -5,7 +5,7 @@ export interface SocialMediaLinkProps {
 
 const SocialMediaLink = ({ url, logo }: SocialMediaLinkProps) => (
   <a
-    className="px-2 flex rounded-md h-full align-middle hover:bg-gray-700 hover:bg-opacity-60"
+    className="px-2 flex rounded-md h-full align-middle transition-colors hover:bg-white/10"
     href={url}
     target="_blank"
     rel="noreferrer noopener"
