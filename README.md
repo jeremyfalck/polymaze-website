@@ -69,3 +69,14 @@ The workflow can also be started manually from the Actions tab on any branch, wh
 - Domain `polymaze.fr` and the free hosting are managed in the OVH manager (Web Cloud -> Hebergements web).
 - The domain must be attached to the hosting (Multisite tab, root folder `www`) with the free Let's Encrypt SSL certificate enabled (SSL tab).
 - **The free hosting must stay renewed**: keep the renewal on automatic, otherwise OVH deletes it.
+
+## Hero video
+
+The home page hero plays `public/hero.webm` and `public/hero.mp4` (landscape, 10-15 s, muted, loops, about 3 MB max each). Without them the hero shows the collage image. Phones and reduced-motion users always get the image.
+
+```bash
+ffmpeg -i input.mov -an -vf "scale=1280:-2,fps=30" -c:v libx264 -crf 26 -preset slow -pix_fmt yuv420p -movflags +faststart public/hero.mp4
+ffmpeg -i input.mov -an -vf "scale=1280:-2,fps=30" -c:v libvpx-vp9 -crf 34 -b:v 0 -row-mt 1 public/hero.webm
+```
+
+If a file is over 3 MB, raise `-crf` by 2 (smaller, softer) or trim the clip.

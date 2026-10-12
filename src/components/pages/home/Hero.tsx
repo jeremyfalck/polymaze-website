@@ -22,8 +22,8 @@ export const Hero = ({ headerHeight }: { headerHeight: number }) => (
       playsInline
       preload="metadata"
     >
-      <source src="/hero.webm" type="video/webm" />
-      <source src="/hero.mp4" type="video/mp4" />
+      <source src={`${process.env.PUBLIC_URL}/hero.webm`} type="video/webm" />
+      <source src={`${process.env.PUBLIC_URL}/hero.mp4`} type="video/mp4" />
     </video>
     <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black" />
     <div className="relative h-full flex flex-col items-center justify-center gap-6 px-6 text-center">
