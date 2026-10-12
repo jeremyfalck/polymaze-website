@@ -4,6 +4,7 @@ import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 import colors from "../../../assets/colors.json";
 import { Hero } from "./Hero";
+import SocialWall from "./SocialWall";
 
 const headingClass =
   "text-white text-3xl font-semibold tracking-tight p-6 sm:p-0 sm:py-6";
@@ -64,6 +65,7 @@ export default function Home() {
             />
           </div>
         </section>
+        <SocialWall />
       </div>
       <NavBar index={0} ref={ref} />
     </main>
