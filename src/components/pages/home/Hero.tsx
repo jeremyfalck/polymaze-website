@@ -15,7 +15,7 @@ export const Hero = ({ headerHeight }: { headerHeight: number }) => (
   >
     {/* Poster only on narrow viewports and with reduced motion. */}
     <video
-      className="hidden sm:block motion-reduce:hidden absolute inset-0 w-full h-full object-cover"
+      className="hidden motion-safe:sm:block absolute inset-0 w-full h-full object-cover"
       autoPlay
       muted
       loop
@@ -27,7 +27,11 @@ export const Hero = ({ headerHeight }: { headerHeight: number }) => (
     </video>
     <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black" />
     <div className="relative h-full flex flex-col items-center justify-center gap-6 px-6 text-center">
-      <img className="w-8/12 sm:w-4/12" alt="Polymaze" src={PolymazeLogoWhite} />
+      <img
+        className="w-8/12 sm:w-4/12"
+        alt="Polymaze"
+        src={PolymazeLogoWhite}
+      />
       <p className="text-white text-2xl sm:text-3xl font-semibold tracking-tight">
         Nouveau single : Take your hand
       </p>

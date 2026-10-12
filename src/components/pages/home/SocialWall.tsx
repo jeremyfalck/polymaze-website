@@ -28,7 +28,7 @@ const LazyMount = ({ children }: { children: React.ReactNode }) => {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -41,11 +41,18 @@ const LazyMount = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const Card = ({ children }: { children: React.ReactNode }) => (
+const Card = ({
+  children,
+  flush = false,
+}: {
+  children: React.ReactNode;
+  flush?: boolean;
+}) => (
   <Paper
     elevation={0}
     sx={{
-      p: 2,
+      // Instagram embeds need >=326px; flush keeps them unclipped on phones.
+      p: flush ? { xs: 0, sm: 2 } : 2,
       color: "white",
       backgroundColor: "rgba(255,255,255,0.05)",
       backdropFilter: "blur(6px)",
@@ -68,22 +75,25 @@ export default function SocialWall() {
         setItems(
           interleave<WallItem>(
             posts.map((url) => ({ kind: "instagram", url })),
-            videos.map((v) => ({ kind: "youtube", ...v }))
-          )
-        )
+            videos.map((v) => ({ kind: "youtube", ...v })),
+          ),
+        ),
     );
   }, []);
 
   if (items.length === 0) return null;
 
   return (
-    <section className="max-w-7xl mx-auto py-6 px-6 lg:px-8">
+    <section className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <p className="text-white text-3xl font-semibold tracking-tight pb-6">
         Nos derniers posts
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.slice(0, showAll ? undefined : FIRST_BATCH).map((item) => (
-          <Card key={`${item.kind}-${item.url}`}>
+          <Card
+            key={`${item.kind}-${item.url}`}
+            flush={item.kind === "instagram"}
+          >
             {item.kind === "youtube" ? (
               <>
                 <p className="text-white text-lg font-semibold pb-3">
