@@ -46,8 +46,7 @@ const Legal = () => {
           </Section>
 
           <Section title="Directeur de la publication">
-            {/* TODO: add the director's name once the association has picked one. */}
-            <p>Le représentant légal de l'association POLYMAZE.</p>
+            <p>Sébastien Clos, représentant légal de l'association POLYMAZE.</p>
           </Section>
 
           <Section title="Hébergeur">
