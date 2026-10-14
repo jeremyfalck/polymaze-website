@@ -7,3 +7,6 @@ RewriteRule ^ https://polymaze.fr%{REQUEST_URI} [L,R=301]
 # Redirect www to apex
 RewriteCond %{HTTP_HOST} ^www\.polymaze\.fr$ [NC]
 RewriteRule ^ https://polymaze.fr%{REQUEST_URI} [L,R=301]
+
+# Clean admin URL: serve the app, which then redirects to /#/admin
+RewriteRule ^admin/?$ /index.html [L]

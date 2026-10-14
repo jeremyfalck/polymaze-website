@@ -2,5 +2,6 @@
     "projects": "/",
     "band": "/band",
     "concerts": "/concerts",
-    "legal": "/mentions-legales"
+    "legal": "/mentions-legales",
+    "admin": "/admin"
 }

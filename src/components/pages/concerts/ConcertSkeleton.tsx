@@ -1,6 +1,6 @@
 import { Box, Paper, Skeleton } from "@mui/material";
 
-// Placeholder shaped like ConcertItem, shown while the sheet loads.
+// Placeholder shaped like ConcertItem, shown while concerts load.
 const ConcertSkeleton = () => (
   <Paper
     elevation={0}
