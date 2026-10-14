@@ -4,9 +4,10 @@ Website of the band Polymaze, built with [Create React App](https://github.com/f
 
 ## Editing site content
 
-Instagram posts and YouTube videos come from a published Google Sheet (tabs `instagram`: `url`; `youtube`: `title`, `url`; `concerts`: `date, place, city, department, description`).
-Edit the sheet; changes show on the site within ~5 minutes. Publishing is on for the whole document;
-a new tab needs its `gid` added to `GIDS` in `src/sheets/SheetsManager.ts`.
+Concerts, YouTube videos and Instagram posts are edited at **https://polymaze.fr/#/admin** (Google login).
+They are stored in the Firestore doc `content/site`; only the emails listed in `firestore.rules` can write
+(add a band member there, then `firebase deploy --only firestore:rules`). One-time Firebase setup: enable Firestore and Google sign-in, and add
+`polymaze.fr` (and the GitHub Pages domain) to Authentication -> Authorized domains.
 
 ## Local development
 

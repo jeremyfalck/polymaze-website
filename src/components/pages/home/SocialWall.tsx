@@ -1,41 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Paper } from "@mui/material";
+import LazyMount from "../../LazyMount";
 import { InstagramEmbed } from "react-social-media-embed";
 import {
   getInstagramPosts,
   getYoutubeVideos,
   YoutubeVideoConfig,
-} from "../../../sheets/SheetsManager";
+} from "../../../content/ContentManager";
 
 const FIRST_BATCH = 6;
-
-// Mounts children only once the placeholder nears the viewport (embeds are heavy).
-const LazyMount = ({ children }: { children: React.ReactNode }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className={visible ? "" : "min-h-[300px]"}>
-      {visible && children}
-    </div>
-  );
-};
 
 const Card = ({
   children,

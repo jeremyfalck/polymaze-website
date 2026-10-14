@@ -6,6 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
+// The site uses HashRouter: make the clean /admin URL land on /#/admin.
+if (window.location.pathname.replace(/\/$/, "").endsWith("/admin"))
+  window.location.replace(window.location.pathname.replace(/admin\/?$/, "") + "#/admin");
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
