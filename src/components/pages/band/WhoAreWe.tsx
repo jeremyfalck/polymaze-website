@@ -36,14 +36,27 @@ export const WhoAreWe = () => {
                 display: "flex",
                 flexDirection: { xs: "column", sm: "row" },
                 gap: { xs: 0.5, sm: 3 },
+                position: "relative",
                 pl: 3,
                 py: 1.5,
+                // Dot centred on the line, level with the year's first line.
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  left: -6,
+                  top: "calc(12px + 0.85em - 5px)",
+                  width: 10,
+                  height: 10,
+                  borderRadius: "50%",
+                  backgroundColor: colors.purple,
+                },
               }}
             >
               <Typography
                 sx={{
                   color: colors.purple,
                   fontWeight: 700,
+                  lineHeight: 1.7,
                   minWidth: 56,
                   flexShrink: 0,
                 }}
