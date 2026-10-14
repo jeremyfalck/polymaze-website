@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import LegalLink from "../../LegalLink";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 import colors from "../../../assets/colors.json";
-import { ConcertConfig, getConcerts } from "../../../sheets/SheetsManager";
+import { ConcertConfig, getConcerts } from "../../../content/ContentManager";
 import ConcertItem from "./ConcertItem";
 import ConcertSkeleton from "./ConcertSkeleton";
 import { Stack, Typography } from "@mui/material";
@@ -98,6 +99,7 @@ const Concerts = () => {
               </Stack>
             ))}
           </Stack>
+          <LegalLink />
         </div>
         <NavBar index={2} ref={ref} />
       </main>

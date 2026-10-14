@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BandHeader } from "./BandHeader";
 import { MembersPresentation } from "./MembersPresentation";
 import { WhoAreWe } from "./WhoAreWe";
+import LegalLink from "../../LegalLink";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 
@@ -35,6 +36,7 @@ export default function Band() {
           <BandHeader />
           <WhoAreWe />
           <MembersPresentation />
+          <LegalLink />
         </div>
         <NavBar index={1} ref={ref} />
       </main>

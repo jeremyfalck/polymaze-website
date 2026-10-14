@@ -1,4 +1,5 @@
 import { UIEvent, useEffect, useRef, useState } from "react";
+import LegalLink from "../../LegalLink";
 import { NavBar } from "../../navbar/Navbar";
 import useHeaderHeight from "../../navbar/useHeaderHeight";
 import { Hero, HeroBackground } from "./Hero";
@@ -69,6 +70,7 @@ export default function Home() {
           </div>
         </section>
         <SocialWall />
+        <LegalLink />
       </div>
       <NavBar index={0} ref={ref} />
     </main>
