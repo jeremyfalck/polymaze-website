@@ -50,12 +50,6 @@ export const WhoAreWe = () => {
       <Paper elevation={0} sx={cardSx}>
         <List items={strings.band_presentation_part2} />
       </Paper>
-      <Paper elevation={0} sx={{ ...cardSx, mt: 3 }}>
-        <Typography sx={{ fontWeight: 600, mb: 1 }}>
-          {strings.band_stage_intro}
-        </Typography>
-        <List items={strings.band_stage_members} />
-      </Paper>
       <Typography
         sx={{
           mt: 4,

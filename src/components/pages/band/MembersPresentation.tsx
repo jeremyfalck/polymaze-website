@@ -10,68 +10,80 @@ const presentations = [
     image: SebastienPhoto,
     name: strings.member1_name,
     instrument: strings.member1_instrument,
+    description: strings.band_stage_members[0],
   },
   {
     image: ThibautPhoto,
     name: strings.member2_name,
     instrument: strings.member2_instrument,
+    description: strings.band_stage_members[1],
   },
   {
     image: ClementPhoto,
     name: strings.member3_name,
     instrument: strings.member3_instrument,
+    description: strings.band_stage_members[2],
   },
 ];
 
 export const MembersPresentation = () => {
   return (
-    <ul
-      role="list"
-      className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto px-4 py-6"
-    >
-      {presentations.map((member) => (
-        <li key={member.name}>
-          <Paper
-            elevation={0}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 1.5,
-              p: 3,
-              color: "white",
-              backgroundColor: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(6px)",
-              border: "1px solid rgba(201,165,227,0.25)",
-              borderRadius: 3,
-              transition: "all 0.2s ease",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                borderColor: colors.purple,
-                boxShadow: "0 0 24px rgba(201,165,227,0.35)",
-              },
-            }}
-          >
-            <Avatar
-              src={member.image}
-              alt={member.name}
+    <div className="max-w-3xl mx-auto px-4 py-6">
+      <Typography sx={{ color: "white", fontWeight: 600, mb: 2 }}>
+        {strings.band_stage_intro}
+      </Typography>
+      <ul role="list" className="grid grid-cols-1 gap-4">
+        {presentations.map((member) => (
+          <li key={member.name}>
+            <Paper
+              elevation={0}
               sx={{
-                width: 112,
-                height: 112,
-                border: `3px solid ${colors.purple}`,
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                alignItems: { xs: "center", sm: "flex-start" },
+                textAlign: { xs: "center", sm: "left" },
+                gap: 3,
+                p: 3,
+                color: "white",
+                backgroundColor: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(6px)",
+                border: "1px solid rgba(201,165,227,0.25)",
+                borderRadius: 3,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  borderColor: colors.purple,
+                  boxShadow: "0 0 24px rgba(201,165,227,0.35)",
+                },
               }}
-            />
-            <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
-              {member.name}
-            </Typography>
-            <Chip
-              label={member.instrument}
-              variant="outlined"
-              sx={{ color: colors.purple, borderColor: colors.purple }}
-            />
-          </Paper>
-        </li>
-      ))}
-    </ul>
+            >
+              <Avatar
+                src={member.image}
+                alt={member.name}
+                sx={{
+                  width: 112,
+                  height: 112,
+                  flexShrink: 0,
+                  border: `3px solid ${colors.purple}`,
+                }}
+              />
+              <div className="flex flex-col items-center sm:items-start gap-1.5">
+                <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
+                  {member.name}
+                </Typography>
+                <Chip
+                  label={member.instrument}
+                  variant="outlined"
+                  sx={{ color: colors.purple, borderColor: colors.purple }}
+                />
+                <Typography sx={{ lineHeight: 1.7, mt: 1 }}>
+                  {member.description}
+                </Typography>
+              </div>
+            </Paper>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
