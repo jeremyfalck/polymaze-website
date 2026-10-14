@@ -63,7 +63,9 @@ export const WhoAreWe = () => {
               >
                 {year}
               </Typography>
-              <Typography sx={{ lineHeight: 1.7 }}>{text}</Typography>
+              <Typography sx={{ lineHeight: 1.7, whiteSpace: "pre-line" }}>
+                {text}
+              </Typography>
             </Box>
           ))}
         </Box>
