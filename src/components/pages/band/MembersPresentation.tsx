@@ -84,6 +84,18 @@ export const MembersPresentation = () => {
           </li>
         ))}
       </ul>
+      <Typography
+        sx={{
+          mt: 4,
+          pl: 2,
+          color: colors.purple,
+          fontSize: { xs: 18, sm: 20 },
+          fontStyle: "italic",
+          borderLeft: `3px solid ${colors.purple}`,
+        }}
+      >
+        {strings.band_presentation_part3}
+      </Typography>
     </div>
   );
 };

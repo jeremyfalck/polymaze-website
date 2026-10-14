@@ -50,18 +50,6 @@ export const WhoAreWe = () => {
       <Paper elevation={0} sx={cardSx}>
         <List items={strings.band_presentation_part2} />
       </Paper>
-      <Typography
-        sx={{
-          mt: 4,
-          pl: 2,
-          color: colors.purple,
-          fontSize: { xs: 18, sm: 20 },
-          fontStyle: "italic",
-          borderLeft: `3px solid ${colors.purple}`,
-        }}
-      >
-        {strings.band_presentation_part3}
-      </Typography>
     </Box>
   );
 };
