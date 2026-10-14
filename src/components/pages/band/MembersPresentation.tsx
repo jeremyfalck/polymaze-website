@@ -1,4 +1,4 @@
-import { Avatar, Chip, Paper, Typography } from "@mui/material";
+import { Avatar, Paper, Typography } from "@mui/material";
 import strings from "../../../assets/text/strings.json";
 import colors from "../../../assets/colors.json";
 import ClementPhoto from "../../../assets/images/clement_photo.png";
@@ -9,19 +9,16 @@ const presentations = [
   {
     image: SebastienPhoto,
     name: strings.member1_name,
-    instrument: strings.member1_instrument,
     description: strings.band_stage_members[0],
   },
   {
     image: ThibautPhoto,
     name: strings.member2_name,
-    instrument: strings.member2_instrument,
     description: strings.band_stage_members[1],
   },
   {
     image: ClementPhoto,
     name: strings.member3_name,
-    instrument: strings.member3_instrument,
     description: strings.band_stage_members[2],
   },
 ];
@@ -71,12 +68,7 @@ export const MembersPresentation = () => {
                 <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
                   {member.name}
                 </Typography>
-                <Chip
-                  label={member.instrument}
-                  variant="outlined"
-                  sx={{ color: colors.purple, borderColor: colors.purple }}
-                />
-                <Typography sx={{ lineHeight: 1.7, mt: 1 }}>
+                <Typography sx={{ lineHeight: 1.7 }}>
                   {member.description}
                 </Typography>
               </div>
