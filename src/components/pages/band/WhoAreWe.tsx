@@ -2,26 +2,59 @@ import { Box, Paper, Typography } from "@mui/material";
 import strings from "../../../assets/text/strings.json";
 import colors from "../../../assets/colors.json";
 
+const cardSx = {
+  p: { xs: 2, sm: 3 },
+  color: "white",
+  backgroundColor: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(6px)",
+  border: "1px solid rgba(201,165,227,0.25)",
+  borderRadius: 3,
+};
+
+// One bullet per item, purple dot on the left, so each fact reads on its own.
+const List = ({ items }: { items: string[] }) => (
+  <Box component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
+    {items.map((text) => (
+      <Box
+        component="li"
+        key={text}
+        sx={{
+          position: "relative",
+          pl: 3,
+          py: 1,
+          lineHeight: 1.7,
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            top: "1.05em",
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+            backgroundColor: colors.purple,
+          },
+        }}
+      >
+        {text}
+      </Box>
+    ))}
+  </Box>
+);
+
 export const WhoAreWe = () => {
   return (
     <Box className="max-w-3xl mx-auto px-4 py-6">
       <Typography sx={{ color: "white", fontSize: { xs: 18, sm: 22 }, mb: 3 }}>
         {strings.band_presentation_part1}
       </Typography>
-      <Paper
-        elevation={0}
-        sx={{
-          p: { xs: 2, sm: 4 },
-          color: "white",
-          backgroundColor: "rgba(255,255,255,0.05)",
-          backdropFilter: "blur(6px)",
-          border: "1px solid rgba(201,165,227,0.25)",
-          borderRadius: 3,
-        }}
-      >
-        <Typography sx={{ lineHeight: 1.8 }}>
-          {strings.band_presentation_part2}
+      <Paper elevation={0} sx={cardSx}>
+        <List items={strings.band_presentation_part2} />
+      </Paper>
+      <Paper elevation={0} sx={{ ...cardSx, mt: 3 }}>
+        <Typography sx={{ fontWeight: 600, mb: 1 }}>
+          {strings.band_stage_intro}
         </Typography>
+        <List items={strings.band_stage_members} />
       </Paper>
       <Typography
         sx={{

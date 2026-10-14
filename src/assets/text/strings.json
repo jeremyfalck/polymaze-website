@@ -1,6 +1,17 @@
 {
     "band_presentation_part1": "Polymaze est un projet voulant apporter sa modeste pierre à l’édifice du rock. Des maquettes, une résidence dans la salle de diffusion « Le Nadir » à Bourges et des concerts permettent au groupe de sortir leur premier EP Another Step en avril 2022.",
-    "band_presentation_part2": "Puis ils sortent un single « Take your hand » l’année suivante. En 2024, ils débarquent avec un nouvel EP intitulé « Behind your lies » sur lequel on peut entendre le titre « Lose you » qui aborde le sujet du deuil ou bien la chanson « New world » qui évoque les utopies. En 2024, le groupe a sorti deux clips. Un clip sur le titre « Take your hand » et le second sur le titre « Lose you ». En 2025, le groupe profite de la période estivale pour sortir un single « Dark and cold ». Les trois membres assurent la présence sur scène avec enthousiasme et énergie. Un batteur-chanteur qui, comme au temps de Genesis, chante et développe son jeu puissant à la batterie. Un guitariste qui joue sur de multiples teintes avec son instrument en allant de guitares aériennes avec une forte reverb proche des sonorités du rock progressif en passant par une guitare avec distorsion. Puis, une basse grognante et brillante jouée au plectre qui rappelle les années folles du punk rock.",
+    "band_presentation_part2": [
+        "Puis ils sortent un single « Take your hand » l’année suivante.",
+        "En 2024, ils débarquent avec un nouvel EP intitulé « Behind your lies » sur lequel on peut entendre le titre « Lose you » qui aborde le sujet du deuil ou bien la chanson « New world » qui évoque les utopies.",
+        "En 2024, le groupe a sorti deux clips. Un clip sur le titre « Take your hand » et le second sur le titre « Lose you ».",
+        "En 2025, le groupe profite de la période estivale pour sortir un single « Dark and cold »."
+    ],
+    "band_stage_intro": "Les trois membres assurent la présence sur scène avec enthousiasme et énergie.",
+    "band_stage_members": [
+        "Un batteur-chanteur qui, comme au temps de Genesis, chante et développe son jeu puissant à la batterie.",
+        "Un guitariste qui joue sur de multiples teintes avec son instrument en allant de guitares aériennes avec une forte reverb proche des sonorités du rock progressif en passant par une guitare avec distorsion.",
+        "Puis, une basse grognante et brillante jouée au plectre qui rappelle les années folles du punk rock."
+    ],
     "band_presentation_part3": "L’essentiel pour le groupe c’est la scène.",
     "member1_name": "Sébastien",
     "member1_instrument": "Batterie & Chant",
