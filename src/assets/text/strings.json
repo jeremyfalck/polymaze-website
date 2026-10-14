@@ -1,14 +1,35 @@
 {
-    "band_presentation_part1": "Polymaze est un projet voulant apporter sa modeste pierre à l’édifice de la famille du rock. Des maquettes, une résidence dans la salle de diffusion « Le Nadir » à Bourges et des concerts permettent au groupe de sortir leur premier EP Another Step en avril 2022.",
-    "band_presentation_part2": "Pour le soutenir, les trois membres assurent la présence sur scène avec enthousiasme et énergie. Un batteur-chanteur qui, comme au temps de Genesis, chante et développe son jeu puissant à la batterie. Un guitariste qui joue sur de multiples teintes avec son instrument en allant de guitares aériennes avec une forte réverb proche des sonorités du rock progressif en passant par une guitare avec distorsion. Puis,une basse grognante et brillante jouée au plectre qui rappelle les années folles du punk et du punk rock.",
-    "band_presentation_part3": "Le groupe souhaite retourner aux fondamentaux, à savoir l’expérience d’un concert live pour soigner les maux que le manque de liberté nous a causés.",
+    "band_intro": "Polymaze est un projet voulant apporter sa modeste pierre à l’édifice du rock.",
+    "band_timeline": [
+        {
+            "year": "2022",
+            "text": "Des maquettes, une résidence dans la salle de diffusion « Le Nadir » à Bourges et des concerts permettent au groupe de sortir leur premier EP Another Step en avril."
+        },
+        {
+            "year": "2023",
+            "text": "Puis ils sortent un single « Take your hand » l’année suivante."
+        },
+        {
+            "year": "2024",
+            "text": "Ils débarquent avec un nouvel EP intitulé « Behind your lies » sur lequel on peut entendre le titre « Lose you » qui aborde le sujet du deuil ou bien la chanson « New world » qui évoque les utopies."
+        },
+        {
+            "year": "2024",
+            "text": "Le groupe a sorti deux clips. Un clip sur le titre « Take your hand » et le second sur le titre « Lose you »."
+        },
+        {
+            "year": "2025",
+            "text": "Le groupe profite de la période estivale pour sortir un single « Dark and cold »."
+        }
+    ],
+    "band_stage_intro": "Les trois membres assurent la présence sur scène avec enthousiasme et énergie.",
+    "band_stage_members": [
+        "Un batteur-chanteur qui, comme au temps de Genesis, chante et développe son jeu puissant à la batterie.",
+        "Un guitariste qui joue sur de multiples teintes avec son instrument en allant de guitares aériennes avec une forte reverb proche des sonorités du rock progressif en passant par une guitare avec distorsion.",
+        "Une basse grognante et brillante jouée au plectre qui rappelle les années folles du punk rock."
+    ],
+    "band_presentation_part3": "L’essentiel pour le groupe c’est la scène.",
     "member1_name": "Sébastien",
-    "member1_instrument": "Batterie & Chant",
-    "member1_description": "Sébastien",
     "member2_name": "Thibaut",
-    "member2_instrument": "Guitare",
-    "member2_description": "Sébastien",
-    "member3_name": "Clément",
-    "member3_instrument": "Basse & Chant",
-    "member3_description": "Sébastien"
+    "member3_name": "Clément"
 }

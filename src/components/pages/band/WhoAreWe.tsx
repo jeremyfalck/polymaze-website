@@ -5,9 +5,6 @@ import colors from "../../../assets/colors.json";
 export const WhoAreWe = () => {
   return (
     <Box className="max-w-3xl mx-auto px-4 py-6">
-      <Typography sx={{ color: "white", fontSize: { xs: 18, sm: 22 }, mb: 3 }}>
-        {strings.band_presentation_part1}
-      </Typography>
       <Paper
         elevation={0}
         sx={{
@@ -19,22 +16,58 @@ export const WhoAreWe = () => {
           borderRadius: 3,
         }}
       >
-        <Typography sx={{ lineHeight: 1.8 }}>
-          {strings.band_presentation_part2}
+        <Typography sx={{ fontSize: { xs: 18, sm: 22 }, mb: 3 }}>
+          {strings.band_intro}
         </Typography>
+        <Box
+          component="ol"
+          sx={{
+            listStyle: "none",
+            m: 0,
+            p: 0,
+            borderLeft: `2px solid ${colors.purple}`,
+          }}
+        >
+          {strings.band_timeline.map(({ year, text }) => (
+            <Box
+              component="li"
+              key={text}
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: { xs: 0.5, sm: 3 },
+                position: "relative",
+                pl: 3,
+                py: 1.5,
+                // Dot centred on the line, level with the year's first line.
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  left: -6,
+                  top: "calc(12px + 0.85em - 5px)",
+                  width: 10,
+                  height: 10,
+                  borderRadius: "50%",
+                  backgroundColor: colors.purple,
+                },
+              }}
+            >
+              <Typography
+                sx={{
+                  color: colors.purple,
+                  fontWeight: 700,
+                  lineHeight: 1.7,
+                  minWidth: 56,
+                  flexShrink: 0,
+                }}
+              >
+                {year}
+              </Typography>
+              <Typography sx={{ lineHeight: 1.7 }}>{text}</Typography>
+            </Box>
+          ))}
+        </Box>
       </Paper>
-      <Typography
-        sx={{
-          mt: 4,
-          pl: 2,
-          color: colors.purple,
-          fontSize: { xs: 18, sm: 20 },
-          fontStyle: "italic",
-          borderLeft: `3px solid ${colors.purple}`,
-        }}
-      >
-        {strings.band_presentation_part3}
-      </Typography>
     </Box>
   );
 };
