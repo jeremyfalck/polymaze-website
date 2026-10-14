@@ -16,6 +16,7 @@ import { formatDate, fromIsoDate, toIsoDate } from "../../../utils/dateutils";
 import { InstagramEmbed } from "react-social-media-embed";
 import LazyMount from "../../LazyMount";
 import { toYoutubeEmbedUrl } from "../../../content/youtube";
+import { ADMIN_EMAILS } from "../../../content/admins";
 import paths from "../../../constants/paths.json";
 
 type Row = Record<string, string>;
@@ -244,6 +245,13 @@ const Admin = () => {
             <p className="text-white/80">Espace réservé au groupe.</p>
             <button className={btn} onClick={login}>Se connecter avec Google</button>
             {error && <p className="text-white/60">{error}</p>}
+          </div>
+        ) : !user.emailVerified || !ADMIN_EMAILS.includes(user.email ?? "") ? (
+          <div className={`${glass} p-8 text-center space-y-4`}>
+            <p className="text-white/80">
+              Le compte {user.email} n'a pas accès à l'administration.
+            </p>
+            <button className={btn} onClick={() => signOut(auth)}>Changer de compte</button>
           </div>
         ) : (
           <>
