@@ -223,10 +223,25 @@ const Admin = () => {
 
   useEffect(() => onAuthStateChanged(auth, setUser), []);
 
-  const login = () =>
-    signInWithPopup(auth, new GoogleAuthProvider()).catch(() =>
-      setError("Connexion impossible, réessaie.")
-    );
+  // One popup at a time: a second signInWithPopup while one is pending crashes Firebase Auth.
+  const [signingIn, setSigningIn] = useState(false);
+  const login = async () => {
+    if (signingIn) return;
+    setSigningIn(true);
+    setError("");
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider());
+    } catch (e: any) {
+      if (e?.code !== "auth/cancelled-popup-request" && e?.code !== "auth/popup-closed-by-user")
+        setError(
+          e?.code === "auth/popup-blocked"
+            ? "Popup bloquée par le navigateur : autorise-la puis réessaie."
+            : "Connexion impossible, réessaie."
+        );
+    } finally {
+      setSigningIn(false);
+    }
+  };
 
   return (
     <main className="bg-black/60 absolute inset-0 overflow-y-auto text-white">
@@ -243,7 +258,7 @@ const Admin = () => {
         {user === undefined ? null : user === null ? (
           <div className={`${glass} p-8 text-center space-y-4`}>
             <p className="text-white/80">Espace réservé au groupe.</p>
-            <button className={btn} onClick={login}>Se connecter avec Google</button>
+            <button className={btn} disabled={signingIn} onClick={login}>Se connecter avec Google</button>
             {error && <p className="text-white/60">{error}</p>}
           </div>
         ) : !user.emailVerified || !ADMIN_EMAILS.includes(user.email ?? "") ? (
