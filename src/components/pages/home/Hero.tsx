@@ -14,9 +14,9 @@ export const HeroBackground = ({
     className="fixed inset-0 bg-cover bg-center"
     style={{ backgroundImage: `url(${Collage})` }}
   >
-    {/* Poster only on narrow viewports and with reduced motion. */}
+    {/* Poster only with reduced motion. */}
     <video
-      className="hidden motion-safe:sm:block absolute inset-0 w-full h-full object-cover"
+      className="hidden motion-safe:block absolute inset-0 w-full h-full object-cover"
       autoPlay
       muted
       loop
